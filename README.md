@@ -76,6 +76,13 @@ yarn dev
 │   │           ├── RelatedArticles.tsx   # 관련 기사 컴포넌트
 │   │           ├── CommentSection.tsx    # 댓글 섹션
 │   │           ├── ShareButtons.tsx      # 공유 버튼
+│   ├── /authors                          # 작성자(에디터) 페이지 폴더
+│   │   ├── page.tsx                      # 작성자(에디터) 목록 페이지 (URL: /authors)
+│   │   ├── [id]                          # 개별 작성자(에디터) 페이지 폴더 (URL: /authors/[id])
+│   │       ├── page.tsx                  # 개별 작성자(에디터) 페이지
+│   │       ├── /components               # 작성자(에디터) 페이지 전용 컴포넌트 폴더
+│   │           ├── AuthorInfo.tsx        # 작성자(에디터) 정보 컴포넌트
+│   │           ├── ArticleCard.tsx       # 작성자(에디터)가 작성한 기사 카드 컴포넌트
 ├── /components                           # 공통 컴포넌트 폴더 (app 폴더 외부에 위치)
 │   ├── Header.tsx
 │   ├── Footer.tsx
