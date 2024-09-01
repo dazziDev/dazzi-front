@@ -117,3 +117,5 @@ yarn dev
 - Language: TypeScript
 - State Management: 아마도 zustand
 - Deployment: 추후 설정 예정
+
+# husky 설정
