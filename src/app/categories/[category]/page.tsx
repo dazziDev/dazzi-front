@@ -1,6 +1,6 @@
-import ArticleCard from './components/ArticleCard';
-import FilterBar from './components/FilterBar';
-import Pagination from './components/Pagination';
+import ArticleCard from '@/app/categories/[category]/components/ArticleCard';
+import FilterBar from '@/app/categories/[category]/components/FilterBar';
+import Pagination from '@/app/categories/[category]/components/Pagination';
 
 const CategoryPage = () => {
   return (
