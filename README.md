@@ -52,30 +52,31 @@ yarn dev
 ```
 /src
 ├── /app
-│   ├── layout.tsx                    # 공통 레이아웃 파일 (Header, Footer 등)
-│   ├── globals.css                   # 전역 스타일 파일 (Tailwind 초기화 및 글로벌 스타일)
-│   ├── page.tsx                      # 루트 홈 페이지 (URL: /)
-│   ├── /home                         # 홈 페이지 관련 폴더
-│   │   ├── page.tsx                  # 홈 페이지 (URL: /)
-│   │   ├── /components               # 홈 페이지 전용 컴포넌트 폴더
-│   │       ├── CategorySection.tsx   # 각 카테고리 섹션 (문화, 음식, 여행 등)
-│   │       ├── FeaturedArticle.tsx   # 메인 이미지 아래의 주요 기사
-│   ├── /categories                   # 각 카테고리의 게시물 목록 페이지
-│   │   ├── [category]                # 동적 라우팅으로 카테고리별 페이지 처리 (URL: /categories/[category])
-│   │       ├── page.tsx              # 카테고리별 기사 목록 페이지
-│   │       ├── /components           # 카테고리 페이지 전용 컴포넌트 폴더
-│   │           ├── ArticleCard.tsx   # 개별 기사 카드 컴포넌트
-│   │           ├── Pagination.tsx    # 페이지네이션 컴포넌트
-│   │           ├── FilterBar.tsx     # 필터링 바
-│   ├── /articles                     # 개별 기사 페이지 폴더
-│   │   ├── [slug]                    # 개별 기사 상세 페이지 폴더 (URL: /articles/[slug])
-│   │       ├── page.tsx              # 개별 기사 페이지
-│   │       ├── /components           # 기사 상세 페이지 전용 컴포넌트 폴더
-│   │           ├── ArticleContent.tsx# 기사 본문 컴포넌트
-│   │           ├── RelatedArticles.tsx# 관련 기사 컴포넌트
-│   │           ├── CommentSection.tsx# 댓글 섹션
-│   │           ├── ShareButtons.tsx  # 공유 버튼
-├── /components                       # 공통 컴포넌트 폴더 (app 폴더 외부에 위치)
+│   ├── layout.tsx                        # 공통 레이아웃 파일 (Header, Footer 등)
+│   ├── globals.css                       # 전역 스타일 파일 (Tailwind 초기화 및 글로벌 스타일)
+│   ├── page.tsx                          # 루트 홈 페이지 (URL: /)
+│   ├── /home                             # 홈 페이지 관련 폴더
+│   │   ├── page.tsx                      # 홈 페이지 (URL: /)
+│   │   ├── /components                   # 홈 페이지 전용 컴포넌트 폴더
+│   │       ├── CategorySection.tsx       # 각 카테고리 섹션 (문화, 음식, 여행 등)
+│   │       ├── FeaturedArticle.tsx       # 메인 이미지 아래의 주요 기사
+│   ├── /categories                       # 각 카테고리의 게시물 목록 페이지
+│   │   ├── [category]                    # 동적 라우팅으로 카테고리별 페이지 처리 (URL: /categories/[category])
+│   │       ├── page.tsx                  # 카테고리별 기사 목록 페이지
+│   │       ├── /components               # 카테고리 페이지 전용 컴포넌트 폴더
+│   │           ├── ArticleCard.tsx       # 개별 기사 카드 컴포넌트
+│   │           ├── Pagination.tsx        # 페이지네이션 컴포넌트
+│   │           ├── FilterBar.tsx         # 필터링 바
+│   ├── /articles                         # 개별 기사 페이지 폴더
+│   │   ├── [slug]                        # 개별 기사 상세 페이지 폴더 (URL: /articles/[slug])
+│   │       ├── page.tsx                  # 개별 기사 페이지
+│   │       ├── /components               # 기사 상세 페이지 전용 컴포넌트 폴더
+│   │           ├── ArticleContent.tsx    # 기사 본문 컴포넌트
+│   │           ├── AuthorInfo.tsx        # 작성자(에디터) 정보 컴포넌트
+│   │           ├── RelatedArticles.tsx   # 관련 기사 컴포넌트
+│   │           ├── CommentSection.tsx    # 댓글 섹션
+│   │           ├── ShareButtons.tsx      # 공유 버튼
+├── /components                           # 공통 컴포넌트 폴더 (app 폴더 외부에 위치)
 │   ├── Header.tsx
 │   ├── Footer.tsx
 │   ├── Sidebar.tsx
@@ -84,10 +85,12 @@ yarn dev
 │   └── ArticleCard.tsx
 ├── /public                           # 정적 파일 (이미지, 폰트 등)
 ├── /styles
-│   ├── tailwind.css                  # TailwindCSS 설정 파일
+│   ├── 0000.css                      # 추후 추가될 CSS 파일(emotion등)
 ├── /api                              # API 라우트 폴더 (app 폴더 외부에 위치)
 │   ├── /articles
 │   │   └── route.ts                  # 기사 관련 API 라우트
+│   ├── /authors
+│   │   └── route.ts                  # 작성자(에디터) 관련 API 라우트
 │   ├── /categories
 │   │   └── route.ts                  # 카테고리 관련 API 라우트
 │   └── /comments

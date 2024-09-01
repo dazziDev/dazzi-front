@@ -2,12 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 글로벌 CSS 변수 설정 */
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
 
+/* 다크 모드 지원 */
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -16,6 +18,7 @@
   }
 }
 
+/* 기본적인 바디 스타일 설정 */
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -26,6 +29,7 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+/* 커스텀 유틸리티 클래스 */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
