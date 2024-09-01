@@ -1,0 +1,38 @@
+/* 
+  CKEditor에서 작성된 콘텐츠에 TailwindCSS 스타일이 덮어쓰지 않도록 
+  특정 요소의 스타일을 강제로 지정합니다.
+*/
+
+/* CKEditor의 최소 높이 설정 */
+.ck-editor__editable_inline {
+  min-height: 500px;
+}
+
+/* CKEditor 제목 스타일 강제 지정 */
+.ck-content h1,
+.ck-content h2,
+.ck-content h3,
+.ck-content h4,
+.ck-content h5,
+.ck-content h6 {
+  font-weight: bold !important;
+}
+
+.ck-content h1 {
+  font-size: 2em !important;
+}
+.ck-content h2 {
+  font-size: 1.75em !important;
+}
+.ck-content h3 {
+  font-size: 1.5em !important;
+}
+.ck-content h4 {
+  font-size: 1.25em !important;
+}
+.ck-content h5 {
+  font-size: 1em !important;
+}
+.ck-content h6 {
+  font-size: 0.75em !important;
+}
