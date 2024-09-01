@@ -93,6 +93,8 @@ yarn dev
 ├── /public                           # 정적 파일 (이미지, 폰트 등)
 ├── /styles
 │   ├── 0000.css                      # 추후 추가될 CSS 파일(emotion등)
+│   ├── editor.css                    # 에디터 관련 CSS 파일 (태일윈드와 충돌방지 등)
+│   ├── fonts.css                     # 폰트 관련 CSS 파일 (에디터 폰트 등)
 ├── /api                              # API 라우트 폴더 (app 폴더 외부에 위치)
 │   ├── /articles
 │   │   └── route.ts                  # 기사 관련 API 라우트
@@ -107,3 +109,11 @@ yarn dev
 ├── tsconfig.json                     # TypeScript 설정 파일
 └── package.json                      # 패키지 설정 파일
 ```
+
+# 프로젝트 환경
+
+- Framework: Next.js 14 (App Router 사용)
+- Styling: TailwindCSS + 아마도 emotion
+- Language: TypeScript
+- State Management: 아마도 zustand
+- Deployment: 추후 설정 예정
