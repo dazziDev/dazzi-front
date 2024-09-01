@@ -2,7 +2,6 @@
   "name": "dazzi-front",
   "version": "0.1.0",
   "private": true,
-  "license": "UNLICENSED",
   "engines": {
     "node": ">=20.17.0"
   },
@@ -23,7 +22,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@typescript-eslint/parser": "^8.3.0",
-    "eslint": "^9.9.1",
+    "eslint": "^8",
     "eslint-config-next": "^14.2.7",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
