@@ -119,3 +119,6 @@ yarn dev
 - Deployment: 추후 설정 예정
 
 # husky 설정
+
+- 이 프로젝트는 Husky를 사용하여 Git hooks을 설정합니다.
+- 커밋 시 자동으로 yarn lint와 yarn format이 실행되어 코드 품질을 유지합니다.
