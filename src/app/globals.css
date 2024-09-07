@@ -20,7 +20,7 @@
 
 /* 기본적인 바디 스타일 설정 */
 body {
-  color: rgb(var(--foreground-rgb));
+  /* color: rgb(var(--foreground-rgb)); */
   /* background: linear-gradient(
       to bottom,
       transparent,
@@ -31,7 +31,7 @@ body {
 
 /* 커스텀 유틸리티 클래스 */
 @layer utilities {
-  .text-balance {
+  /* .text-balance {
     text-wrap: balance;
-  }
+  } */
 }

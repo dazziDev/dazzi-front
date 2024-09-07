@@ -3,7 +3,7 @@ import MobileMenu from './MobileMenu';
 
 const Header = () => {
   return (
-    <header className="md:bg-gray-800 text-white h-14">
+    <header className="bg-gray-800 text-white h-14">
       <div className="mx-auto flex items-center h-full justify-between px-6">
         {/* 로고 */}
         <div className="flex items-center h-full">
@@ -11,7 +11,6 @@ const Header = () => {
             <span className="text-2xl font-bold">dazzi.</span>
           </Link>
         </div>
-
         {/* PC용 메뉴 */}
         {/* api연결 후 구성 */}
         <nav className="hidden md:flex justify-center items-center space-x-8 mx-auto">
