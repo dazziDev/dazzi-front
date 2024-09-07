@@ -27,7 +27,7 @@ const MobileMenu = () => {
             exit="exit"
             variants={menuVariants}
             transition={{ duration: 0.5 }}
-            className="fixed inset-0 bg-[#E6E6E6] flex flex-col pl-6 pr-6 pb-6"
+            className="fixed inset-0 bg-[#E6E6E6] flex flex-col pl-6 pr-6 pb-6 z-10"
           >
             {/* 상단 로고 및 닫기 버튼 */}
             <div className="flex items-center justify-between w-full h-[54px]">
@@ -70,7 +70,7 @@ const MobileMenu = () => {
             <div className="flex space-x-[16px] mt-auto justify-center w-full">
               <Link href="https://instagram.com" onClick={toggleMenu}>
                 <Image
-                  src="/assets/img/icons/Instagram_R_Clr.webp"
+                  src="/img/icons/Instagram_R_Clr.webp"
                   width={48}
                   height={48}
                   alt="instagram"
@@ -81,7 +81,7 @@ const MobileMenu = () => {
                 onClick={toggleMenu}
               >
                 <Image
-                  src="/assets/img/icons/Youtube_R_Clr.svg"
+                  src="/img/icons/Youtube_R_Clr.svg"
                   width={36}
                   height={36}
                   alt="instagram"
