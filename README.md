@@ -52,6 +52,15 @@ yarn dev
 ```
 /src
 ├── /app
+│   ├── /api                              # API 라우트 폴더 (app 폴더 외부에 위치)
+│   │   ├── /articles
+│   │   │   └── route.ts                  # 기사 관련 API 라우트
+│   │   ├── /authors
+│   │   │   └── route.ts                  # 작성자(에디터) 관련 API 라우트
+│   │   ├── /categories
+│   │   │   └── route.ts                  # 카테고리 관련 API 라우트
+│   │   └── /comments
+│   │       └── route.ts                  # 댓글 관련 API 라우트
 │   ├── layout.tsx                        # 공통 레이아웃 파일 (Header, Footer 등)
 │   ├── globals.css                       # 전역 스타일 파일 (Tailwind 초기화 및 글로벌 스타일)
 │   ├── page.tsx                          # 루트 홈 페이지 (URL: /)
@@ -83,6 +92,7 @@ yarn dev
 │   │       ├── /components               # 작성자(에디터) 페이지 전용 컴포넌트 폴더
 │   │           ├── AuthorInfo.tsx        # 작성자(에디터) 정보 컴포넌트
 │   │           ├── ArticleCard.tsx       # 작성자(에디터)가 작성한 기사 카드 컴포넌트
+│   │           ├── FetchAuthors.ts       # 작성자(에디터) 목록을 가져오는 컴포넌트(더미)
 ├── /components                           # 공통 컴포넌트 폴더 (app 폴더 외부에 위치)
 │   ├── Header.tsx
 │   ├── Footer.tsx
@@ -90,20 +100,16 @@ yarn dev
 │   ├── Breadcrumb.tsx
 │   ├── MobileMenu.tsx
 │   └── ArticleCard.tsx
+├── /store                            # 상태 관리 폴더 (app 폴더 외부에 위치)
+│   ├── useAuthorStore.ts             # 작성자(에디터) 상태 관리 훅
+│   ├── useMenuStore.ts               # 메뉴 상태 관리 훅
 ├── /public                           # 정적 파일 (이미지, 폰트 등)
+│   ├── /fonts
+│   ├── /img
 ├── /styles
 │   ├── 0000.css                      # 추후 추가될 CSS 파일(emotion등)
 │   ├── editor.css                    # 에디터 관련 CSS 파일 (태일윈드와 충돌방지 등)
 │   ├── fonts.css                     # 폰트 관련 CSS 파일 (에디터 폰트 등)
-├── /api                              # API 라우트 폴더 (app 폴더 외부에 위치)
-│   ├── /articles
-│   │   └── route.ts                  # 기사 관련 API 라우트
-│   ├── /authors
-│   │   └── route.ts                  # 작성자(에디터) 관련 API 라우트
-│   ├── /categories
-│   │   └── route.ts                  # 카테고리 관련 API 라우트
-│   └── /comments
-│       └── route.ts                  # 댓글 관련 API 라우트
 ├── next.config.mjs                   # Next.js 설정 파일
 ├── tailwind.config.ts                # TailwindCSS 설정 파일
 ├── tsconfig.json                     # TypeScript 설정 파일
@@ -122,3 +128,7 @@ yarn dev
 
 - 이 프로젝트는 Husky를 사용하여 Git hooks을 설정합니다.
 - 커밋 시 자동으로 yarn lint와 yarn format이 실행되어 코드 품질을 유지합니다.
+
+# 현재 (2024.09.08)
+
+![image](/public/img/dummy/NEXT.nav.png)
