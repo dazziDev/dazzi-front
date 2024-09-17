@@ -28,7 +28,6 @@ const CategorySection = () => {
 
   return (
     <div>
-      {/* 메인 배너 */}
       <div className="relative w-full h-screen lg:h-[667px] md:h-[500px] sm:h-[400px] mb-8">
         <Image
           src={categories[0]?.main.image || ''}
@@ -59,6 +58,7 @@ const CategorySection = () => {
             {categoryData.categories.map((category, index) => (
               <div key={index} className="mb-8">
                 <h3 className="text-2xl font-bold mb-4">{category.category}</h3>
+                <div className="hidden sm:block w-full h-px bg-gray-300 mb-6"></div>
                 <p className="text-lg text-gray-600 mb-6">
                   {category.subtitle}
                 </p>
@@ -89,9 +89,13 @@ const CategorySection = () => {
                           {article.title}
                         </h4>
                         <p className="text-gray-600 mb-4 line-clamp-1">
-                          {article.subtitle}
+                          {article.subtitle.length > 30
+                            ? `${article.subtitle.slice(0, 30)}...`
+                            : article.subtitle}
                         </p>
-                        <p className="text-gray-400 text-sm">{article.date}</p>
+                        <p className="text-gray-400 text-sm mt-4">
+                          {article.date}
+                        </p>
                       </div>
                     </motion.div>
                   ))}
