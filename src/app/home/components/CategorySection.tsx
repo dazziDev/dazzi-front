@@ -61,12 +61,12 @@ const CategorySection = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 relative">
+      <div className="container mx-auto py-8 relative sm:px-4">
         {categories.map((categoryData, categoryIndex) => (
           <div key={categoryIndex} className="mb-12 w-full" ref={ref}>
             {categoryData.categories.map((category, index) => (
               <div key={index} className="mb-8">
-                <h3 className="text-2xl font-bold mb-4">
+                <h3 className="text-2xl font-bold mb-4 px-4 sm:px-0">
                   {category.category}
                   {/* 더보기 버튼 (PC에서만) */}
                   <div className="hidden sm:block top-9 right-0 absolute z-10">
@@ -79,7 +79,7 @@ const CategorySection = () => {
                   </div>
                 </h3>
                 <div className="hidden sm:block w-full h-px bg-gray-300 mb-6"></div>
-                <p className="text-lg text-gray-600 mb-6">
+                <p className="text-lg text-gray-600 mb-6 px-4 sm:px-0">
                   {category.subtitle}
                 </p>
 
