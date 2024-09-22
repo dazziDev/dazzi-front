@@ -3,8 +3,12 @@ import { fetchCategories } from '@/app/home/components/FetchCategories';
 import { useHomeCategoriesStore } from '@/store/useHomeCategoriesStore';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const CategorySection = () => {
   const { categories, setCategories } = useHomeCategoriesStore();
@@ -13,6 +17,10 @@ const CategorySection = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
 
   useEffect(() => {
     async function getData() {
@@ -28,6 +36,7 @@ const CategorySection = () => {
 
   return (
     <div>
+      {/* 메인 배너 */}
       <div className="relative w-full h-screen lg:h-[667px] md:h-[500px] sm:h-[400px] mb-8">
         <Image
           src={categories[0]?.main.image || ''}
@@ -52,53 +61,143 @@ const CategorySection = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 relative">
         {categories.map((categoryData, categoryIndex) => (
           <div key={categoryIndex} className="mb-12 w-full" ref={ref}>
             {categoryData.categories.map((category, index) => (
               <div key={index} className="mb-8">
-                <h3 className="text-2xl font-bold mb-4">{category.category}</h3>
+                <h3 className="text-2xl font-bold mb-4">
+                  {category.category}
+                  {/* 더보기 버튼 (PC에서만) */}
+                  <div className="hidden sm:block top-9 right-0 absolute z-10">
+                    {/* permalink */}
+                    <Link href={`/category/${category.category}`}>
+                      <p className="text-lg hover:underline hover:opacity-25 cursor-pointer">
+                        더보기
+                      </p>
+                    </Link>
+                  </div>
+                </h3>
                 <div className="hidden sm:block w-full h-px bg-gray-300 mb-6"></div>
                 <p className="text-lg text-gray-600 mb-6">
                   {category.subtitle}
                 </p>
 
-                {/* 반응형 그리드 */}
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {category.articles.map((article, articleIndex) => (
-                    <motion.div
-                      key={articleIndex}
-                      initial={{ opacity: 0, y: 50 }}
-                      animate={
-                        inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
-                      }
-                      transition={{ duration: 0.4, delay: articleIndex * 0.1 }}
-                      whileHover={{ scale: 1.05 }}
-                      className="bg-white rounded-lg shadow-md overflow-hidden mx-auto w-full"
-                    >
-                      <div className="relative w-full aspect-square">
-                        <Image
-                          src={article.image}
-                          alt={article.title}
-                          fill
-                          className="object-cover object-center"
-                        />
-                      </div>
-                      <div className="p-4">
-                        <h4 className="text-lg font-semibold mb-2">
-                          {article.title}
-                        </h4>
-                        <p className="text-gray-600 mb-4 line-clamp-1">
-                          {article.subtitle.length > 30
-                            ? `${article.subtitle.slice(0, 30)}...`
-                            : article.subtitle}
-                        </p>
-                        <p className="text-gray-400 text-sm mt-4">
-                          {article.date}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
+                {/* 모바일에서 캐러셀: 세로로 3개씩 표시하고 좌우로 넘김 */}
+                <div className="block sm:hidden">
+                  <Swiper
+                    spaceBetween={20}
+                    slidesPerView={1}
+                    pagination={{ clickable: true }}
+                  >
+                    {Array.from({
+                      length: Math.ceil(category.articles.length / 3),
+                    }).map((_, i) => (
+                      <SwiperSlide key={i}>
+                        <div className="grid grid-cols-1 gap-4 bg-gray-50 p-4 rounded-md shadow-md">
+                          {category.articles
+                            .slice(i * 3, i * 3 + 3)
+                            .map((article, articleIndex) => (
+                              <motion.div
+                                key={articleIndex}
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={
+                                  inView
+                                    ? { opacity: 1, y: 0 }
+                                    : { opacity: 0, y: 50 }
+                                }
+                                transition={{
+                                  duration: 0.4,
+                                  delay: articleIndex * 0.1,
+                                }}
+                                // whileHover={{ scale: 1.05 }}
+                                className="flex bg-white rounded-lg shadow-md overflow-hidden relative"
+                              >
+                                <div className="relative h-[175px] min-w-[132px] max-w-[132px]">
+                                  <Image
+                                    src={article.image}
+                                    alt={article.title}
+                                    fill
+                                    className="object-cover"
+                                    // style={{
+                                    //   aspectRatio: '2/3',
+                                    //   height: '100%',
+                                    // }}
+                                  />
+                                </div>
+                                <div className="ml-4 flex flex-col justify-between">
+                                  <div className="flex-1">
+                                    <h4 className="text-base font-semibold mt-3 mr-3">
+                                      {article.title}
+                                    </h4>
+                                    <p className="text-gray-600 text-sm mr-2 mt-3">
+                                      {article.subtitle.length > 30
+                                        ? `${article.subtitle.slice(0, 30)}...`
+                                        : article.subtitle}
+                                    </p>
+                                  </div>
+                                  <p className="text-gray-400 text-xs mt-2 pb-2">
+                                    {article.date}
+                                  </p>
+                                </div>
+                              </motion.div>
+                            ))}
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
+
+                {/* PC */}
+                <div className="hidden sm:grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {category.articles
+                    // TODO: DOM을 직접 조작하는 방식이라 좋지않음
+                    .slice(0, window.innerWidth >= 1280 ? 4 : 3)
+                    .map((article, articleIndex) => (
+                      // permalink
+                      <Link
+                        href={`/article/${article.title}`}
+                        key={articleIndex}
+                      >
+                        <motion.div
+                          key={articleIndex}
+                          initial={{ opacity: 0, y: 50 }}
+                          animate={
+                            inView
+                              ? { opacity: 1, y: 0 }
+                              : { opacity: 0, y: 50 }
+                          }
+                          transition={{
+                            duration: 0.4,
+                            delay: 0.1,
+                          }}
+                          whileHover={{ scale: 1.05 }}
+                          className="bg-white rounded-lg shadow-md overflow-hidden mx-auto w-full"
+                        >
+                          <div className="relative w-full aspect-square">
+                            <Image
+                              src={article.image}
+                              alt={article.title}
+                              fill
+                              className="object-cover object-center"
+                            />
+                          </div>
+                          <div className="p-4">
+                            <h4 className="text-lg font-semibold mb-2">
+                              {article.title}
+                            </h4>
+                            <p className="text-gray-600 mb-4 line-clamp-1">
+                              {article.subtitle.length > 30
+                                ? `${article.subtitle.slice(0, 30)}...`
+                                : article.subtitle}
+                            </p>
+                            <p className="text-gray-400 text-sm mt-4">
+                              {article.date}
+                            </p>
+                          </div>
+                        </motion.div>
+                      </Link>
+                    ))}
                 </div>
               </div>
             ))}
