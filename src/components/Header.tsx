@@ -3,7 +3,7 @@ import MobileMenu from './MobileMenu';
 
 const Header = () => {
   return (
-    <header className="bg-gray-800 text-white h-14">
+    <header className="absolute top-0 left-0 w-full h-14 z-10 bg-transparent md:relative md:bg-gray-800 text-white">
       <div className="mx-auto flex items-center h-full justify-between px-6">
         {/* 로고 */}
         <div className="flex items-center h-full">

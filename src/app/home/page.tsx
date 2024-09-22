@@ -3,12 +3,9 @@ import FeaturedArticle from '@/app/home/components/FeaturedArticle';
 
 const Home = () => {
   return (
-    <div>
+    <div className="absolute top-0 w-full h-screen -z-10 sm:z-10 md:relative md:h-auto">
       <FeaturedArticle />
-      <CategorySection category="문화" />
-      <CategorySection category="음식" />
-      <CategorySection category="여행" />
-      <CategorySection category="취미" />
+      <CategorySection />
     </div>
   );
 };

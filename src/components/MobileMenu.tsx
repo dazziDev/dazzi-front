@@ -84,7 +84,7 @@ const MobileMenu = () => {
                   src="/img/icons/Youtube_R_Clr.svg"
                   width={36}
                   height={36}
-                  alt="instagram"
+                  alt="youtube"
                   style={{
                     backgroundColor: 'white',
                     borderRadius: '50%',

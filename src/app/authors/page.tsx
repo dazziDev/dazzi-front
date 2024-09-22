@@ -46,9 +46,8 @@ const AuthorsPage = () => {
               <Image
                 src={author.rectSrc}
                 alt={author.name}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-t-lg"
+                fill
+                className="rounded-t-lg object-cover"
               />
             </div>
             <div className="p-4">

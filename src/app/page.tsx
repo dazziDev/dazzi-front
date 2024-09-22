@@ -1,9 +1,7 @@
+import Home from '@/app/home/page';
+
 const Root = () => {
-  return (
-    <div>
-      <h1>Root</h1>
-    </div>
-  );
+  return <Home />;
 };
 
 export default Root;
