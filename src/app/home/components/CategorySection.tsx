@@ -79,11 +79,9 @@ const CategorySection = () => {
                   </div>
                 </h3>
                 <div className="hidden sm:block w-full h-px bg-gray-300 mb-6"></div>
-                <p className="text-lg text-gray-600 mb-6 px-4 sm:px-0">
-                  {category.subtitle}
-                </p>
+                <p className="text-lg mb-6 px-4 sm:px-0">{category.subtitle}</p>
 
-                {/* 모바일에서 캐러셀: 세로로 3개씩 표시하고 좌우로 넘김 */}
+                {/* MOBILE */}
                 <div className="block sm:hidden">
                   <Swiper
                     spaceBetween={20}
@@ -94,7 +92,7 @@ const CategorySection = () => {
                       length: Math.ceil(category.articles.length / 3),
                     }).map((_, i) => (
                       <SwiperSlide key={i}>
-                        <div className="grid grid-cols-1 gap-4 bg-gray-50 p-4 rounded-md shadow-md">
+                        <div className="grid grid-cols-1 gap-4 p-4 rounded-md shadow-md">
                           {category.articles
                             .slice(i * 3, i * 3 + 3)
                             .map((article, articleIndex) => (
@@ -111,7 +109,7 @@ const CategorySection = () => {
                                   delay: articleIndex * 0.1,
                                 }}
                                 // whileHover={{ scale: 1.05 }}
-                                className="flex bg-white rounded-lg shadow-md overflow-hidden relative"
+                                className="flex rounded-lg shadow-md overflow-hidden relative border"
                               >
                                 <div className="relative h-[175px] min-w-[132px] max-w-[132px]">
                                   <Image
@@ -119,10 +117,6 @@ const CategorySection = () => {
                                     alt={article.title}
                                     fill
                                     className="object-cover"
-                                    // style={{
-                                    //   aspectRatio: '2/3',
-                                    //   height: '100%',
-                                    // }}
                                   />
                                 </div>
                                 <div className="ml-4 flex flex-col justify-between">
@@ -130,13 +124,13 @@ const CategorySection = () => {
                                     <h4 className="text-base font-semibold mt-3 mr-3">
                                       {article.title}
                                     </h4>
-                                    <p className="text-gray-600 text-sm mr-2 mt-3">
+                                    <p className="text-sm mr-2 mt-3">
                                       {article.subtitle.length > 30
                                         ? `${article.subtitle.slice(0, 30)}...`
                                         : article.subtitle}
                                     </p>
                                   </div>
-                                  <p className="text-gray-400 text-xs mt-2 pb-2">
+                                  <p className="text-xs mt-2 pb-2">
                                     {article.date}
                                   </p>
                                 </div>
@@ -172,7 +166,7 @@ const CategorySection = () => {
                             delay: 0.1,
                           }}
                           whileHover={{ scale: 1.05 }}
-                          className="bg-white rounded-lg shadow-md overflow-hidden mx-auto w-full"
+                          className="bg-white rounded-lg shadow-md overflow-hidden mx-auto w-full h-full"
                         >
                           <div className="relative w-full aspect-square">
                             <Image
@@ -182,8 +176,8 @@ const CategorySection = () => {
                               className="object-cover object-center"
                             />
                           </div>
-                          <div className="p-4">
-                            <h4 className="text-lg font-semibold mb-2">
+                          <div className="p-4 flex flex-col justify-between">
+                            <h4 className="text-lg font-semibold mb-2 dark:text-gray-800">
                               {article.title}
                             </h4>
                             <p className="text-gray-600 mb-4 line-clamp-1">
