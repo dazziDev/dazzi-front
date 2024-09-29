@@ -32,6 +32,7 @@ const Header = () => {
         window.removeEventListener('scroll', controlHeader);
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastScrollY]);
 
   return (
