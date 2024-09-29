@@ -30,7 +30,7 @@ const AuthorsPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8 text-center">다찌의 에디터</h1>
-      <p className="text-lg text-gray-600 text-left mb-12">
+      <p className="text-lg  text-left mb-12">
         다찌에서 매주 다양한 주제의 매거진을 위해 힘쓰고 있는 에디터를
         소개합니다.
       </p>
@@ -38,7 +38,7 @@ const AuthorsPage = () => {
         {authors.map((author) => (
           <motion.div
             key={author.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
+            className="rounded-lg shadow-md overflow-hidden"
             whileHover={{ scale: 1.05 }}
           >
             <div className="relative w-full h-48 md:h-60">
@@ -54,7 +54,7 @@ const AuthorsPage = () => {
               <h2 className="text-lg md:text-xl font-semibold mb-2">
                 {author.name}
               </h2>
-              <p className="text-gray-600 text-sm md:text-base">
+              <p className="text-sm md:text-base">
                 <span className="block md:hidden">
                   {truncateText(author.introduction, 30)}
                 </span>
