@@ -14,4 +14,5 @@ services:
       - /app/node_modules
     # env_file:
     #   - .env.production
-    command: 'yarn start'
+    command: >
+      sh -c "yarn build && yarn start"
