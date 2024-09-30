@@ -19,8 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        {/* Header 모바일일때 ↓ */}
-        <div className="mt-14 sm:mt-14">{children}</div>
+        <div className="mt-0 sm:mt-14">{children}</div>
       </body>
     </html>
   );

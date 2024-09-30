@@ -29,13 +29,15 @@ const MobileMenu = () => {
               exit="exit"
               variants={menuVariants}
               transition={{ duration: 0.5 }}
-              className="fixed inset-0 bg-gray-900 flex flex-col pb-6 z-50 h-screen"
+              className="fixed inset-0 bg-gray-900 flex flex-col pb-6 z-50 h-[calc(100vh-56px)]"
             >
               {/* 상단 로고 및 닫기 버튼 */}
               <div className="flex items-center justify-between w-full h-[54px] bg-black">
-                <span className="text-[24px] font-bold text-white pl-3">
-                  dazzi.
-                </span>
+                <Link href="/" onClick={toggleMenu}>
+                  <span className="text-2xl font-bold text-white pl-3">
+                    dazzi.
+                  </span>
+                </Link>
                 <button
                   onClick={toggleMenu}
                   className="text-4xl text-white pr-3"
@@ -82,7 +84,7 @@ const MobileMenu = () => {
                 </Link>
               </div>
               {/* 하단 아이콘 */}
-              <div className="flex space-x-[16px] mt-auto justify-center w-full">
+              <div className="flex space-x-[16px] mt-auto justify-center w-full pb-6">
                 <Link href="https://instagram.com" onClick={toggleMenu}>
                   <Image
                     src="/img/icons/Instagram_R_Clr.webp"

@@ -37,7 +37,7 @@ const CategorySection = () => {
   return (
     <div>
       {/* 메인 배너 */}
-      <div className="relative w-full h-screen lg:h-[667px] md:h-[500px] sm:h-[400px] mb-8">
+      <div className="relative w-full h-[calc(100vh-56px)] lg:h-[667px] md:h-[500px] sm:h-[400px] mb-8">
         <Image
           src={categories[0]?.main.image || ''}
           alt="main-banner"
