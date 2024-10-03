@@ -1,9 +1,10 @@
 'use client';
-import { useMenuStore } from '@/store/useMenuStore';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { RemoveScroll } from 'react-remove-scroll';
+
+import { useMenuStore } from '@/store/useMenuStore';
 
 const MobileMenu = () => {
   const { isOpen, toggleMenu } = useMenuStore();

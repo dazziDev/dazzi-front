@@ -1,7 +1,9 @@
-import Header from '@/components/Header'; // Header 추가
+import './globals.css';
+
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
-import './globals.css';
+
+import Header from '@/components/Header'; // Header 추가
 
 const inter = Noto_Sans_KR({ subsets: ['latin'] });
 
