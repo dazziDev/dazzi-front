@@ -1,6 +1,6 @@
 {
   "extends": ["next", "next/core-web-vitals", "plugin:prettier/recommended"],
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "simple-import-sort"],
   "rules": {
     "prettier/prettier": [
       "error",
@@ -11,6 +11,8 @@
         "trailingComma": "es5",
         "printWidth": 80
       }
-    ]
+    ],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
   }
 }

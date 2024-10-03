@@ -1,16 +1,14 @@
 'use client';
+import 'swiper/css';
+import 'swiper/css/pagination';
+
 import { fetchArticles } from '@/app/home/components/FetchArticles';
-import {
-  Article as ArticleType,
-  useArticlesStore,
-} from '@/store/useArticlesStore';
+import { useArticlesStore } from '@/store/useArticlesStore';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import 'swiper/css';
-import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 const Article = () => {
@@ -33,7 +31,7 @@ const Article = () => {
     getData();
   }, [setArticles]);
 
-  const articlesByCategory: { [categoryName: string]: ArticleType[] } = {};
+  const articlesByCategory: { [categoryName: string]: any[] } = {};
   articles.forEach((article) => {
     if (!articlesByCategory[article.categoryName]) {
       articlesByCategory[article.categoryName] = [];

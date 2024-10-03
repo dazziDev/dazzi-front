@@ -1,9 +1,11 @@
-import Header from '@/components/Header'; // Header 추가
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+import type { Metadata } from 'next';
+import { Noto_Sans_KR } from 'next/font/google';
+
+import Header from '@/components/Header'; // Header 추가
+
+const inter = Noto_Sans_KR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Create Next App',

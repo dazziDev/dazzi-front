@@ -1,5 +1,6 @@
-import { Author } from '@/store/useAuthorStore';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { Author } from '@/store/useAuthorStore';
 
 export async function GET(req: NextRequest) {
   // 예시 데이터 반환 (추후 DB 연동 가능)

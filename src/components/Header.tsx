@@ -1,8 +1,8 @@
 'use client';
 import Link from 'next/link';
-import MobileMenu from './MobileMenu';
-
 import { useEffect, useState } from 'react';
+
+import MobileMenu from './MobileMenu';
 
 const Header = () => {
   const [showHeader, setShowHeader] = useState(true);

@@ -1,6 +1,3 @@
-// import { Categories } from '@/store/useHomeCategoriesStore';
-// import { NextRequest, NextResponse } from 'next/server';
-
 // export async function GET(req: NextRequest) {
 //   // 예시 데이터 반환
 //   // 아래 형식의 데이터가 카테고리는 아니지 카테고리는 카테고리만, 이건 카테고리 안에 들어가는 최신순 게시글들의 요약버전
