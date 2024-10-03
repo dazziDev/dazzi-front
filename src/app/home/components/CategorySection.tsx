@@ -2,14 +2,15 @@
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import { fetchArticles } from '@/app/home/components/FetchArticles';
-import { useArticlesStore } from '@/store/useArticlesStore';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { fetchArticles } from '@/app/home/components/FetchArticles';
+import { useArticlesStore } from '@/store/useArticlesStore';
 
 const Article = () => {
   const { articles, setArticles } = useArticlesStore();
