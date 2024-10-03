@@ -1,14 +1,16 @@
 'use client';
-import { fetchCategories } from '@/app/home/components/FetchCategories';
-import { useHomeCategoriesStore } from '@/store/useHomeCategoriesStore';
+import 'swiper/css';
+import 'swiper/css/pagination';
+
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import 'swiper/css';
-import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { fetchCategories } from '@/app/home/components/FetchCategories';
+import { useHomeCategoriesStore } from '@/store/useHomeCategoriesStore';
 
 const CategorySection = () => {
   const { categories, setCategories } = useHomeCategoriesStore();

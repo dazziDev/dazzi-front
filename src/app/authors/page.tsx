@@ -1,9 +1,10 @@
 'use client';
-import { fetchAuthors } from '@/app/authors/components/FetchAuthors';
-import { useAuthorStore } from '@/store/useAuthorStore';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect } from 'react';
+
+import { fetchAuthors } from '@/app/authors/components/FetchAuthors';
+import { useAuthorStore } from '@/store/useAuthorStore';
 
 const AuthorsPage = () => {
   const { authors, setAuthors } = useAuthorStore();
