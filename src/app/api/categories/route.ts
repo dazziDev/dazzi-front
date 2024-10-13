@@ -16,11 +16,11 @@ export async function GET(req: NextRequest) {
       categories: [
         {
           category: '문화',
-          subtitle: '도쿄에서 만나는 특별한 문화 현장',
           articles: [
             {
               title: '뉴진스 도쿄돔 팬미팅, 제가 가보겠습니다',
-              subtitle: '회사 조퇴하고 다녀온 뉴진스 팬미팅 후기',
+              subtitle:
+                '회사 조퇴하고 다녀온 뉴진스 팬미팅 후기회사 조퇴하고 다녀온 뉴진스 팬미팅 후기회사 조퇴하고 다녀온 뉴진스 팬미팅 후기회사 조퇴하고 다녀온 뉴진스 팬미팅 후기회사 조퇴하고 다녀온 뉴진스 팬미팅 후기',
               date: '2024.09.08',
               image: '/img/homeCategoriesDummy/2.jpeg',
             },
@@ -94,7 +94,6 @@ export async function GET(req: NextRequest) {
         },
         {
           category: '음식',
-          subtitle: '일본의 독특한 미식 경험',
           articles: [
             {
               title: '우에노는 처음이라꼬?',
@@ -160,7 +159,6 @@ export async function GET(req: NextRequest) {
         },
         {
           category: '여행',
-          subtitle: '도쿄에서 경험하는 특별한 여행',
           articles: [
             {
               title: '도쿄돔에서 보낸 짜릿한 순간',

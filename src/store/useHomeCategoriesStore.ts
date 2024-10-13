@@ -13,7 +13,6 @@ export interface Categories {
   };
   categories: {
     category: string;
-    subtitle: string;
     articles: {
       title: string;
       subtitle: string;

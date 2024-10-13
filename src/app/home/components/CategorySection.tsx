@@ -81,20 +81,18 @@ const CategorySection = () => {
                   </div>
                 </h3>
                 <div className="hidden sm:block w-full h-px bg-gray-300 mb-6"></div>
-                <p className="text-lg mb-6 px-4 sm:px-0">{category.subtitle}</p>
-
                 {/* MOBILE */}
-                <div className="block sm:hidden">
+                <div className="pl-4">
                   <Swiper
-                    spaceBetween={20}
-                    slidesPerView={1}
+                    slidesPerView={1.03}
                     pagination={{ clickable: true }}
+                    spaceBetween={20}
                   >
                     {Array.from({
                       length: Math.ceil(category.articles.length / 3),
                     }).map((_, i) => (
                       <SwiperSlide key={i}>
-                        <div className="grid grid-cols-1 gap-4 p-4 rounded-md shadow-md">
+                        <div className="grid grid-rows-3 gap-4">
                           {category.articles
                             .slice(i * 3, i * 3 + 3)
                             .map((article, articleIndex) => (
@@ -111,25 +109,23 @@ const CategorySection = () => {
                                   delay: articleIndex * 0.1,
                                 }}
                                 // whileHover={{ scale: 1.05 }}
-                                className="flex rounded-lg shadow-md overflow-hidden relative border"
+                                className="flex"
                               >
-                                <div className="relative h-[175px] min-w-[132px] max-w-[132px]">
+                                <div className="relative w-[34%] h-auto aspect-[2/3]">
                                   <Image
                                     src={article.image}
                                     alt={article.title}
                                     fill
-                                    className="object-cover"
+                                    className="object-cover rounded-xl"
                                   />
                                 </div>
-                                <div className="ml-4 flex flex-col justify-between">
+                                <div className="ml-3 flex flex-col justify-between w-full gap-3">
                                   <div className="flex-1">
-                                    <h4 className="text-base font-semibold mt-3 mr-3">
+                                    <h4 className="text-base font-semibold">
                                       {article.title}
                                     </h4>
-                                    <p className="text-sm mr-2 mt-3">
-                                      {article.subtitle.length > 30
-                                        ? `${article.subtitle.slice(0, 30)}...`
-                                        : article.subtitle}
+                                    <p className="text-sm line-clamp-2">
+                                      {article.subtitle}
                                     </p>
                                   </div>
                                   <p className="text-xs mt-2 pb-2">
