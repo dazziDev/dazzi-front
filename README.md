@@ -2,7 +2,7 @@
 
 ## 프로젝트 설정
 
-### test 2
+### test
 
 ### 1. Node.js 및 Yarn 설치
 
