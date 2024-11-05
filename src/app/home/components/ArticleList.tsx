@@ -103,7 +103,9 @@ const ArticleList = () => {
                                 {article.editorName}
                               </p>
                               <p className="text-xs pb-2">
-                                {article.updateAt.toLocaleDateString()}
+                                {new Date(
+                                  article.updateAt
+                                ).toLocaleDateString()}
                               </p>
                             </div>
                           </motion.div>
@@ -150,7 +152,7 @@ const ArticleList = () => {
                           : article.subtitle}
                       </p>
                       <p className="text-gray-400 text-sm mt-4">
-                        {article.updateAt.toLocaleDateString()}
+                        {new Date(article.updateAt).toLocaleDateString()}
                       </p>
                     </div>
                   </motion.div>

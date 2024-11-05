@@ -18,7 +18,7 @@ export interface Article {
   editorName: string; // 에디터 이름
 }
 
-export interface Category {
+export interface ArticleCategory {
   categoryId: number; // 카테고리ID
   categoryName: string; // 카테고리 이름
   articles: Article[];

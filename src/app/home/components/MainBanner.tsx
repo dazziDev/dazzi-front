@@ -38,6 +38,7 @@ const MainBanner = () => {
         pagination={{ clickable: true }}
         autoplay={{ delay: 5000 }}
         loop
+        className="h-full"
       >
         {mainArticles.map((article, idx) => (
           <SwiperSlide key={idx}>
