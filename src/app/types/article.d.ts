@@ -21,5 +21,5 @@ export interface Article {
 export interface ArticleCategory {
   categoryId: number; // 카테고리ID
   categoryName: string; // 카테고리 이름
-  articles: Article[];
+  article: Article[];
 }
