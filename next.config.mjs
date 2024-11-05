@@ -1,4 +1,3 @@
-// next.config.mjs
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
@@ -6,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'dazzitest.s3.ap-northeast-1.amazonaws.com', // 수정된 부분
+        hostname: 'dazzitest.s3.ap-northeast-1.amazonaws.com',
         pathname: '/**',
       },
     ],
