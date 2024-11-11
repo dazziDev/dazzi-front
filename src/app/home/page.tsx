@@ -3,7 +3,7 @@ import MainBanner from '@/app/home/components/MainBanner';
 
 const Home = () => {
   return (
-    <div className="absolute top-0 w-full h-screen -z-10 sm:z-10 md:relative md:h-auto">
+    <div className="mt-14 absolute top-0 w-full h-screen -z-10 sm:z-10 md:relative md:h-auto">
       <div>
         <MainBanner />
         <ArticleList />

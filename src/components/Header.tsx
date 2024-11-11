@@ -2,23 +2,34 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import { fetchCategories } from '@/app/api/categories/fetchCategories';
+
 import MobileMenu from './MobileMenu';
 
 const Header = () => {
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [categories, setCategories] = useState<
+    { categoryId: number; categoryName: string; permalink: string }[]
+  >([]);
+
+  // 카테고리 데이터 불러오기
+  useEffect(() => {
+    const getCategories = async () => {
+      const data = await fetchCategories();
+      setCategories(data);
+    };
+    getCategories();
+  }, []);
 
   // 스크롤 방향에 따른 헤더 표시/숨김 제어
   const controlHeader = () => {
     if (typeof window !== 'undefined') {
       if (window.scrollY === 0) {
-        // 최상단에서 헤더 표시
         setShowHeader(true);
       } else if (window.scrollY < lastScrollY) {
-        // 스크롤을 위로 올리면 헤더 숨김
         setShowHeader(false);
       } else {
-        // 스크롤을 아래로 내리면 헤더 표시
         setShowHeader(true);
       }
       setLastScrollY(window.scrollY);
@@ -32,7 +43,6 @@ const Header = () => {
         window.removeEventListener('scroll', controlHeader);
       };
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastScrollY]);
 
   return (
@@ -50,18 +60,16 @@ const Header = () => {
         </div>
         {/* PC용 메뉴: 중앙 정렬 */}
         <nav className="hidden md:flex justify-center items-center space-x-8 text-white flex-grow">
-          <Link href="/categories/culture">
-            <span className="hover:text-gray-400 cursor-pointer">문화</span>
-          </Link>
-          <Link href="/categories/food">
-            <span className="hover:text-gray-400 cursor-pointer">음식</span>
-          </Link>
-          <Link href="/categories/travel">
-            <span className="hover:text-gray-400 cursor-pointer">여행</span>
-          </Link>
-          <Link href="/categories/hobby">
-            <span className="hover:text-gray-400 cursor-pointer">취미</span>
-          </Link>
+          {categories.map((category) => (
+            <Link
+              key={category.categoryId}
+              href={`/categories/${category.permalink}`}
+            >
+              <span className="hover:text-gray-400 cursor-pointer">
+                {category.categoryName}
+              </span>
+            </Link>
+          ))}
         </nav>
         {/* 모바일용 메뉴 */}
         <div className="md:hidden overflow-hidden overflow-y-hidden">
