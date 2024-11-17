@@ -36,3 +36,32 @@
 .ck-content h6 {
   font-size: 0.75em !important;
 }
+
+/* PC 환경에서만 prose 클래스를 중앙 정렬 */
+@media (min-width: 768px) {
+  .prose {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* raw-html-embed가 prose 정렬의 영향을 받지 않도록 분리 */
+  .prose > .raw-html-embed {
+    align-self: stretch; /* 부모의 align-items: center를 무시하고 전체 너비를 사용 */
+    flex: 0 0 auto; /* 크기가 줄어들지 않도록 설정 */
+    width: 100%; /* 원래 너비 유지 */
+  }
+}
+
+/* 텍스트 요소에 좌우 여백 추가 */
+.prose.prose-center > :not(.raw-html-embed):not(figure) {
+  margin-left: 1rem; /* 여백 설정 */
+  margin-right: 1rem; /* 여백 설정 */
+}
+
+/* 이미지와 raw-html-embed는 스타일 그대로 */
+.prose.prose-center figure.image {
+  margin-left: 0;
+  margin-right: 0;
+  display: block;
+}

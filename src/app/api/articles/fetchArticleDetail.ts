@@ -1,5 +1,3 @@
-// src/app/api/articles/fetchArticleDetail.ts
-
 import axios from 'axios';
 
 import { ArticleDetail, ArticleDetailAPI } from '@/app/types/articleDetail';

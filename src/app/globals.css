@@ -35,3 +35,6 @@ body {
     text-wrap: balance;
   } */
 }
+
+@import '../styles/fonts.css';
+@import '../styles/editor.css';
