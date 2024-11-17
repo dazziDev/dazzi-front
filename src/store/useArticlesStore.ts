@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 
-import { Category } from '@/app/types/article';
+import { ArticleCategory } from '@/app/types/article';
 
 interface ArticlesStore {
   /// 카테고리별로 나누어진 기사들
-  articlesByCategory: Category[];
-  setArticlesByCategory: (categories: Category[]) => void;
+  articlesByCategory: ArticleCategory[];
+  setArticlesByCategory: (categories: ArticleCategory[]) => void;
 }
 
 export const useArticlesStore = create<ArticlesStore>((set) => ({

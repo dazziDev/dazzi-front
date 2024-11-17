@@ -37,7 +37,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Header />
-        <div className="mt-0 sm:mt-14">{children}</div>
+        <div>{children}</div>
       </body>
     </html>
   );
