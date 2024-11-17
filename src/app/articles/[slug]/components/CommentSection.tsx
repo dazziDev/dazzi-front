@@ -28,7 +28,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({ articleId }) => {
         />
         <button
           onClick={handleCommentSubmit}
-          className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
+          disabled
+          className="mt-2 px-4 py-2 bg-gray-300 text-white rounded"
         >
           등록
         </button>
