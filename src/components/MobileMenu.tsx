@@ -2,18 +2,32 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 
+import { fetchCategories } from '@/app/api/categories/fetchCategories'; // 카테고리 가져오기
 import { useMenuStore } from '@/store/useMenuStore';
 
 const MobileMenu = () => {
   const { isOpen, toggleMenu } = useMenuStore();
+  const [categories, setCategories] = useState<
+    { categoryId: number; categoryName: string; permalink: string }[]
+  >([]);
 
   const menuVariants = {
     hidden: { opacity: 0, x: '100%' },
     visible: { opacity: 1, x: 0 },
     exit: { opacity: 0, x: '100%' },
   };
+
+  // 카테고리 데이터 불러오기
+  useEffect(() => {
+    const getCategories = async () => {
+      const data = await fetchCategories();
+      setCategories(data);
+    };
+    getCategories();
+  }, []);
 
   return (
     <div className="">
@@ -47,43 +61,21 @@ const MobileMenu = () => {
                 </button>
               </div>
 
-              {/* 메뉴 항목 */}
+              {/* 카테고리 메뉴 항목 */}
               <nav className="flex flex-col items-end mt-[24px] space-y-[24px] flex-grow pl-6 pr-6">
-                <Link href="/categories/food" onClick={toggleMenu}>
-                  <span className="block font-bold text-[24px] text-white">
-                    음식
-                  </span>
-                </Link>
-                <Link href="/categories/travel" onClick={toggleMenu}>
-                  <span className="block font-bold text-[24px] text-white">
-                    여행
-                  </span>
-                </Link>
-                <Link href="/categories/daily" onClick={toggleMenu}>
-                  <span className="block font-bold text-[24px] text-white">
-                    일상
-                  </span>
-                </Link>
-                <Link href="/categories/interview" onClick={toggleMenu}>
-                  <span className="block font-bold text-[24px] text-white">
-                    거리 인터뷰
-                  </span>
-                </Link>
-                <Link href="/categories/fashion" onClick={toggleMenu}>
-                  <span className="block font-bold text-[24px] text-white">
-                    패션
-                  </span>
-                </Link>
+                {categories.map((category) => (
+                  <Link
+                    key={category.categoryId}
+                    href={`/categories/${category.permalink}`}
+                    onClick={toggleMenu}
+                  >
+                    <span className="block font-bold text-[24px] text-white">
+                      {category.categoryName}
+                    </span>
+                  </Link>
+                ))}
               </nav>
 
-              {/* {중간 네비} */}
-              <div className="pl-6 pr-6 pb-6">
-                <Link href="/authors" onClick={toggleMenu}>
-                  <span className="block font-bold text-[24px] text-white">
-                    다찌의 에디터
-                  </span>
-                </Link>
-              </div>
               {/* 하단 아이콘 */}
               <div className="flex space-x-[16px] mt-auto justify-center w-full pb-6">
                 <Link href="https://instagram.com" onClick={toggleMenu}>

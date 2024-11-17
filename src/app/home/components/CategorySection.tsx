@@ -26,7 +26,9 @@ const CategorySection: React.FC<CategorySectionProps> = ({ category }) => {
         <h3 className="text-2xl font-bold mb-4 px-4 sm:px-0">
           {category.categoryName}
           <div className="hidden sm:block top-9 right-0 absolute z-10">
-            <Link href={`/category/${category.categoryId}`}>
+            {/* 더보기 카테고리 모음 페이지 */}
+            <Link href="">
+              {/* <Link href={`/category/${category.categoryId}`}> */}
               <p className="text-lg hover:underline hover:opacity-25 cursor-pointer">
                 더보기
               </p>
