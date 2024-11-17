@@ -35,21 +35,22 @@ const ArticleContent: React.FC = () => {
         />
       </div>
 
-      {/* 타이틀과 서브타이틀 */}
-      <h1 className="text-4xl font-bold mb-4">{articleDetail.title}</h1>
-      <h2 className="text-xl text-gray-600 mb-6">{articleDetail.subtitle}</h2>
-      <div className="text-sm text-gray-500 mb-4">
-        <p>
-          By {articleDetail.editorName} | Updated on{' '}
-          {new Date(articleDetail.updateAt).toLocaleDateString()}
-        </p>
+      <div className="container mx-auto">
+        {/* 타이틀과 서브타이틀 */}
+        <h1 className="text-4xl font-bold mb-4">{articleDetail.title}</h1>
+        <h2 className="text-xl text-gray-600 mb-6">{articleDetail.subtitle}</h2>
+        <div className="text-sm text-gray-500 mb-4">
+          <p>
+            By {articleDetail.editorName} | Updated on{' '}
+            {new Date(articleDetail.updateAt).toLocaleDateString()}
+          </p>
+        </div>
+        {/* 텍스트 본문 */}
+        <div
+          className="prose"
+          dangerouslySetInnerHTML={{ __html: processedText }}
+        />
       </div>
-
-      {/* 텍스트 본문 */}
-      <div
-        className="prose"
-        dangerouslySetInnerHTML={{ __html: processedText }}
-      />
     </div>
   );
 };
