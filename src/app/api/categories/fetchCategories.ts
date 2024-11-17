@@ -1,11 +1,10 @@
-import axios from 'axios';
-
+import axiosInstance from '@/app/api/axiosInstance';
 import { Category } from '@/app/types/category';
 
 export const fetchCategories = async (): Promise<Category[]> => {
   try {
-    const response = await axios.get<{ data: Category[] }>(
-      'http://localhost/api/v1/web/category/list'
+    const response = await axiosInstance.get<{ data: Category[] }>(
+      'category/list'
     );
     return response.data.data;
   } catch (error) {

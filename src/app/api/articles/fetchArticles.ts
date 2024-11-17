@@ -1,11 +1,10 @@
-import axios from 'axios';
-
+import axiosInstance from '@/app/api/axiosInstance';
 import { ArticleCategory } from '@/app/types/article';
 
 export const fetchArticles = async (): Promise<ArticleCategory[]> => {
   try {
-    const response = await axios.get<{ data: ArticleCategory[] }>(
-      `${process.env.NEXT_PUBLIC_API_URL}/article/list`
+    const response = await axiosInstance.get<{ data: ArticleCategory[] }>(
+      '/article/list'
     );
     console.log('API response:', response.data); // 확인용 로그
 
