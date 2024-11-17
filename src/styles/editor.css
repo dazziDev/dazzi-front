@@ -4,37 +4,30 @@
 */
 
 /* CKEditor의 최소 높이 설정 */
-.ck-editor__editable_inline {
-  min-height: 500px;
-}
-
-/* CKEditor 제목 스타일 강제 지정 */
-.ck-content h1,
-.ck-content h2,
-.ck-content h3,
-.ck-content h4,
-.ck-content h5,
-.ck-content h6 {
+/* editor min-height */
+.prose h1 {
+  font-size: 2em !important;
   font-weight: bold !important;
 }
-
-.ck-content h1 {
-  font-size: 2em !important;
-}
-.ck-content h2 {
+.prose h2 {
   font-size: 1.75em !important;
+  font-weight: bold !important;
 }
-.ck-content h3 {
+.prose h3 {
   font-size: 1.5em !important;
+  font-weight: bold !important;
 }
-.ck-content h4 {
+.prose h4 {
   font-size: 1.25em !important;
+  font-weight: bold !important;
 }
-.ck-content h5 {
+.prose h5 {
   font-size: 1em !important;
+  font-weight: bold !important;
 }
-.ck-content h6 {
+.prose h6 {
   font-size: 0.75em !important;
+  font-weight: bold !important;
 }
 
 /* PC 환경에서만 prose 클래스를 중앙 정렬 */
@@ -42,7 +35,7 @@
   .prose {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
   }
 
   /* raw-html-embed가 prose 정렬의 영향을 받지 않도록 분리 */
@@ -50,6 +43,9 @@
     align-self: stretch; /* 부모의 align-items: center를 무시하고 전체 너비를 사용 */
     flex: 0 0 auto; /* 크기가 줄어들지 않도록 설정 */
     width: 100%; /* 원래 너비 유지 */
+  }
+  .prose.prose-center figure.image {
+    align-self: center;
   }
 }
 
@@ -60,8 +56,3 @@
 }
 
 /* 이미지와 raw-html-embed는 스타일 그대로 */
-.prose.prose-center figure.image {
-  margin-left: 0;
-  margin-right: 0;
-  display: block;
-}
