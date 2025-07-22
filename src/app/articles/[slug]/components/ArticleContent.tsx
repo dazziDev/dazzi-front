@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import { useArticleDetailStore } from '@/store/useArticleDetailStore';
@@ -27,11 +28,13 @@ const ArticleContent: React.FC = () => {
   return (
     <div>
       {/* 메인 이미지 배너 */}
-      <div className="w-full h-[300px] md:h-[500px] overflow-hidden">
-        <img
+      <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden">
+        <Image
           src={mainImage}
           alt={articleDetail.title}
-          className="object-cover w-full h-full"
+          fill
+          className="object-cover"
+          priority
         />
       </div>
 

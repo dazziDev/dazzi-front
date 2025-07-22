@@ -45,9 +45,10 @@ export const fetchArticles = async (): Promise<ArticleCategory[]> => {
     return categories;
   } catch (error) {
     console.error('❌ Failed to fetch articles:', error);
-    if (error.response) {
-      console.error('❌ Error response:', error.response.data);
-      console.error('❌ Error status:', error.response.status);
+    if (error instanceof Error && 'response' in error) {
+      const axiosError = error as any;
+      console.error('❌ Error response:', axiosError.response?.data);
+      console.error('❌ Error status:', axiosError.response?.status);
     }
     throw new Error('Failed to fetch articles');
   }
