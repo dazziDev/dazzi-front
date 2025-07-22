@@ -22,21 +22,21 @@ const Header = () => {
     getCategories();
   }, []);
 
-  // 스크롤 방향에 따른 헤더 표시/숨김 제어
-  const controlHeader = () => {
-    if (typeof window !== 'undefined') {
-      if (window.scrollY === 0) {
-        setShowHeader(true);
-      } else if (window.scrollY < lastScrollY) {
-        setShowHeader(false);
-      } else {
-        setShowHeader(true);
-      }
-      setLastScrollY(window.scrollY);
-    }
-  };
-
   useEffect(() => {
+    // 스크롤 방향에 따른 헤더 표시/숨김 제어
+    const controlHeader = () => {
+      if (typeof window !== 'undefined') {
+        if (window.scrollY === 0) {
+          setShowHeader(true);
+        } else if (window.scrollY < lastScrollY) {
+          setShowHeader(false);
+        } else {
+          setShowHeader(true);
+        }
+        setLastScrollY(window.scrollY);
+      }
+    };
+
     if (typeof window !== 'undefined') {
       window.addEventListener('scroll', controlHeader);
       return () => {
