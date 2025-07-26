@@ -7,7 +7,7 @@ export const fetchArticles = async (): Promise<ArticleCategory[]> => {
     console.log('🔗 Base URL:', process.env.NEXT_PUBLIC_API_URL);
 
     const response = await axiosInstance.get<{ data: ArticleCategory[] }>(
-      '/api/v1/web/article/list'
+      '/article/list'
     );
 
     console.log('✅ API response 전체:', response);

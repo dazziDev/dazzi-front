@@ -4,7 +4,7 @@ import { Editor } from '@/app/types/editor';
 export const fetchEditorDetail = async (editorId: string): Promise<Editor> => {
   try {
     const response = await axiosInstance.get<Editor>(
-      `/api/v1/web/editor/${editorId}`
+      `/editor/${editorId}`
     );
     return response.data;
   } catch (error) {
