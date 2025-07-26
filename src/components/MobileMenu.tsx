@@ -66,7 +66,7 @@ const MobileMenu = () => {
                 {categories.map((category) => (
                   <Link
                     key={category.categoryId}
-                    href={`/categories/${category.permalink}`}
+                    href={`/categories/${encodeURIComponent(category.permalink)}`}
                     onClick={toggleMenu}
                   >
                     <span className="block font-bold text-[24px] text-white">
@@ -74,6 +74,11 @@ const MobileMenu = () => {
                     </span>
                   </Link>
                 ))}
+                <Link href="/editors" onClick={toggleMenu}>
+                  <span className="block font-bold text-[24px] text-white">
+                    다찌들
+                  </span>
+                </Link>
               </nav>
 
               {/* 하단 아이콘 */}
@@ -87,7 +92,7 @@ const MobileMenu = () => {
                   />
                 </Link>
                 <Link
-                  href="https://youtube.com/@namagawaki1229"
+                  href="https://youtube.com/@Dazzi_mawari"
                   onClick={toggleMenu}
                 >
                   <Image

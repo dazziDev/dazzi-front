@@ -1,5 +1,4 @@
-import axios from 'axios';
-
+import axiosInstance from '@/app/api/axiosInstance';
 import { ArticleDetail, ArticleDetailAPI } from '@/app/types/articleDetail';
 
 /**
@@ -18,8 +17,8 @@ export const fetchArticleDetail = async (
   permalink: string
 ): Promise<ArticleDetail | null> => {
   try {
-    const response = await axios.get<{ data: ArticleDetailAPI }>(
-      `${process.env.NEXT_PUBLIC_ADMIN_API_URL}/article/detail/${permalink}`
+    const response = await axiosInstance.get<{ data: ArticleDetailAPI }>(
+      `/api/v1/admin/article/detail/${permalink}`
     );
     const data = response.data.data;
     const processedData: ArticleDetail = {

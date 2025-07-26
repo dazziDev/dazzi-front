@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { fetchMainArticle } from '@/app/api/articles/fetchMainArticle';
+import MainBannerSkeleton from '@/components/ui/MainBannerSkeleton';
 import { useMainArticleStore } from '@/store/useMainArticleStore';
 
 const MainBanner = () => {
@@ -28,49 +29,88 @@ const MainBanner = () => {
     getMainArticles();
   }, [setMainArticles]);
 
-  // 로딩 바 혹은 아래 스켈레톤
-  if (!mainArticles.length) return null;
+  // ローディング中はスケルトンを表示
+  if (!mainArticles.length) return <MainBannerSkeleton />;
 
   return (
-    <div className="relative container mx-auto h-[calc(100vh-56px)] lg:h-[667px] md:h-[500px] sm:h-[400px] mb-8">
+    <div className="relative w-full h-[70vh] lg:h-[600px] md:h-[500px] sm:h-[400px] mb-16 overflow-hidden rounded-2xl">
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 5000 }}
+        pagination={{
+          clickable: true,
+          bulletClass: 'swiper-pagination-bullet !bg-white/60 !w-2 !h-2',
+          bulletActiveClass:
+            'swiper-pagination-bullet-active !bg-white !scale-125',
+        }}
+        autoplay={{ delay: 6000, disableOnInteraction: false }}
         loop
-        className="h-full"
+        className="h-full rounded-2xl"
       >
         {mainArticles.map((article, idx) => (
           <SwiperSlide key={idx}>
             <Link
               href={`/articles/${article.permalink}`}
-              key={idx}
-              passHref
-              prefetch={false}
+              className="block relative w-full h-full group cursor-pointer"
             >
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
+
               <Image
                 src={article.imageUrl || ''}
-                alt={`main-banner-${idx}`}
+                alt={article.title}
                 fill
-                className="w-full h-full object-cover"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                priority={idx === 0}
               />
 
-              <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end lg:items-start md:items-start sm:items-end lg:justify-start md:justify-start sm:justify-start">
-                <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1 }}
-                  className="absolute inset-x-0 bottom-[15%] p-4 text-white sm:relative sm:bottom-auto sm:left-auto sm:inset-auto lg:ml-8 lg:mt-8 md:mt-6 md:ml-6"
-                >
-                  <h2 className="text-3xl md:text-3xl font-bold mb-4 lg:text-6xl lg:mb-2 lg:text-left sm:text-left sm:max-w-[400px] max-w-[262px] lg:max-w-[680px] lg:leading-normal">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="absolute bottom-0 left-0 right-0 z-20 p-8 lg:p-12"
+              >
+                <div className="max-w-4xl">
+                  <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight line-clamp-2"
+                  >
                     {article.title}
-                  </h2>
-                  <p className="md:text-base text-lg lg:text-left sm:text-left sm:max-w-[400px] max-w-[330px] lg:text-2xl lg:max-w-[680px] lg:leading-normal">
+                  </motion.h1>
+
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.6 }}
+                    className="text-sm md:text-lg lg:text-xl text-white/90 mb-6 leading-relaxed line-clamp-2 max-w-2xl"
+                  >
                     {article.subtitle}
-                  </p>
-                </motion.div>
-              </div>
+                  </motion.p>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.8 }}
+                    className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-white font-medium hover:bg-white/30 transition-all duration-300 group-hover:translate-x-1"
+                  >
+                    続きを読む
+                    <svg
+                      className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </motion.div>
+                </div>
+              </motion.div>
             </Link>
           </SwiperSlide>
         ))}

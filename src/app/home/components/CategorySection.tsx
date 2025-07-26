@@ -21,124 +21,141 @@ const CategorySection: React.FC<CategorySectionProps> = ({ category }) => {
   });
 
   return (
-    <div ref={ref} className="mb-12 w-full">
-      <div className="mb-8">
-        <h3 className="text-2xl font-bold mb-4 px-4 sm:px-0">
+    <section ref={ref} className="mb-16">
+      {/* 섹션 헤더 */}
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-3xl font-bold text-foreground">
           {category.categoryName}
-          <div className="hidden sm:block top-9 right-0 absolute z-10">
-            {/* 더보기 카테고리 모음 페이지 */}
-            <Link href="">
-              {/* <Link href={`/category/${category.categoryId}`}> */}
-              <p className="text-lg hover:underline hover:opacity-25 cursor-pointer">
-                더보기
-              </p>
-            </Link>
-          </div>
-        </h3>
-        <div className="hidden sm:block w-full h-px bg-gray-300 mb-6"></div>
-
-        {/* MOBILE */}
-        <div className="block sm:hidden">
-          <Swiper
-            spaceBetween={20}
-            slidesPerView={1}
-            pagination={{ clickable: true }}
+        </h2>
+        <Link
+          href={`/categories/${encodeURIComponent(category.permalink)}`}
+          className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center group"
+        >
+          전체보기
+          <svg
+            className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            {Array.from({
-              length: Math.ceil(category.article.length / 3),
-            }).map((_, i) => (
-              <SwiperSlide key={i}>
-                <div className="grid grid-cols-1 gap-4 p-4 rounded-md shadow-md">
-                  {category.article
-                    .slice(i * 3, i * 3 + 3)
-                    .map((article, articleIndex) => (
-                      <Link
-                        href={`/articles/${article.permalink}`}
-                        key={articleIndex}
-                      >
-                        <motion.div
-                          key={articleIndex}
-                          initial={{ opacity: 0, y: 50 }}
-                          animate={
-                            inView
-                              ? { opacity: 1, y: 0 }
-                              : { opacity: 0, y: 50 }
-                          }
-                          transition={{
-                            duration: 0.4,
-                            delay: articleIndex * 0.1,
-                          }}
-                          className="flex rounded-lg shadow-md overflow-hidden relative border"
-                        >
-                          <div className="relative h-[175px] min-w-[132px] max-w-[132px]">
-                            <Image
-                              src={article.imageUrl}
-                              alt={article.title}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                          <div className="ml-4 flex flex-col justify-between">
-                            <h4 className="text-base font-semibold mt-3 mr-3">
-                              {article.title}
-                            </h4>
-                            <p className="text-sm mr-2 mt-3">
-                              {article.subtitle.length > 30
-                                ? `${article.subtitle.slice(0, 30)}...`
-                                : article.subtitle}
-                            </p>
-                            <p className="text-xs mt-2">{article.editorName}</p>
-                            <p className="text-xs pb-2">
-                              {new Date(article.updateAt).toLocaleDateString()}
-                            </p>
-                          </div>
-                        </motion.div>
-                      </Link>
-                    ))}
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </Link>
+      </div>
 
-        {/* PC */}
-        <div className="hidden sm:grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-          {category.article.slice(0, 4).map((article, articleIndex) => (
-            <Link href={`/articles/${article.permalink}`} key={articleIndex}>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white rounded-lg shadow-md overflow-hidden mx-auto w-full h-full"
+      {/* 모바일 버전 */}
+      <div className="block lg:hidden">
+        <div className="space-y-4">
+          {category.article.slice(0, 3).map((article, articleIndex) => (
+            <Link
+              href={`/articles/${article.permalink}`}
+              key={articleIndex}
+              className="block"
+            >
+              <motion.article
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: articleIndex * 0.1 }}
+                className="card hover-lift p-0 overflow-hidden group"
               >
-                <div className="relative w-full aspect-square">
-                  <Image
-                    src={article.imageUrl}
-                    alt={article.title}
-                    fill
-                    className="object-cover object-center"
-                  />
+                <div className="flex">
+                  <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0">
+                    <Image
+                      src={article.imageUrl}
+                      alt={article.title}
+                      fill
+                      className="object-cover rounded-l-lg"
+                    />
+                  </div>
+                  <div className="flex-1 p-4 flex flex-col justify-between">
+                    <div>
+                      <h3 className="font-semibold text-sm sm:text-base text-foreground line-clamp-2 group-hover:text-primary transition-colors">
+                        {article.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground mt-2 line-clamp-2">
+                        {article.subtitle}
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-between mt-3 text-xs text-muted-foreground">
+                      {article.editorId ? (
+                        <Link
+                          href={`/editors/${article.editorId}`}
+                          className="hover:text-primary transition-colors"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {article.editorName}
+                        </Link>
+                      ) : (
+                        <span>{article.editorName}</span>
+                      )}
+                      <time>
+                        {new Date(article.updateAt).toLocaleDateString('ko-KR')}
+                      </time>
+                    </div>
+                  </div>
                 </div>
-                <div className="p-4 flex flex-col justify-between">
-                  <h4 className="text-lg font-semibold mb-2 dark:text-gray-800">
-                    {article.title}
-                  </h4>
-                  <p className="text-gray-600 mb-4 line-clamp-1">
-                    {article.subtitle.length > 30
-                      ? `${article.subtitle.slice(0, 30)}...`
-                      : article.subtitle}
-                  </p>
-                  <p className="text-gray-400 text-sm mt-4">
-                    {new Date(article.updateAt).toLocaleDateString()}
-                  </p>
-                </div>
-              </motion.div>
+              </motion.article>
             </Link>
           ))}
         </div>
       </div>
-    </div>
+
+      {/* 데스크톱 버전 */}
+      <div className="hidden lg:grid grid-cols-3 xl:grid-cols-4 gap-6">
+        {category.article.slice(0, 4).map((article, articleIndex) => (
+          <Link href={`/articles/${article.permalink}`} key={articleIndex}>
+            <motion.article
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: articleIndex * 0.1 }}
+              className="card hover-lift p-0 overflow-hidden group h-full"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={article.imageUrl}
+                  alt={article.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+
+              <div className="p-6">
+                <h3 className="font-semibold text-lg text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors leading-tight">
+                  {article.title}
+                </h3>
+
+                <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
+                  {article.subtitle}
+                </p>
+
+                <div className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t border-border">
+                  {article.editorId ? (
+                    <Link
+                      href={`/editors/${article.editorId}`}
+                      className="font-medium hover:text-primary transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {article.editorName}
+                    </Link>
+                  ) : (
+                    <span className="font-medium">{article.editorName}</span>
+                  )}
+                  <time>
+                    {new Date(article.updateAt).toLocaleDateString('ko-KR')}
+                  </time>
+                </div>
+              </div>
+            </motion.article>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 };
 
