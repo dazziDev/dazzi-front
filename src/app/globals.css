@@ -34,27 +34,29 @@
   * {
     @apply border-border;
   }
-  
+
   body {
     @apply bg-background text-foreground font-medium;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   /* 스크롤바 스타일링 */
   ::-webkit-scrollbar {
     @apply w-2;
   }
-  
+
   ::-webkit-scrollbar-track {
     @apply bg-transparent;
   }
-  
+
   ::-webkit-scrollbar-thumb {
     @apply bg-border rounded-full;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-muted-foreground/30;
   }
@@ -66,30 +68,30 @@
   .card {
     @apply bg-card text-card-foreground rounded-lg border shadow-sm;
   }
-  
+
   /* 버튼 기본 스타일 */
   .btn {
     @apply inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
-  
+
   .btn-primary {
     @apply bg-primary text-primary-foreground hover:bg-primary/90;
   }
-  
+
   .btn-secondary {
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
   }
-  
+
   /* 텍스트 스타일 */
   .text-gradient {
     @apply bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent;
   }
-  
+
   /* 호버 효과 */
   .hover-lift {
     @apply transform transition-all duration-200 hover:-translate-y-1 hover:shadow-lg;
   }
-  
+
   /* 글래스모피즘 효과 */
   .glass {
     @apply bg-white/80 backdrop-blur-sm border border-white/20;
