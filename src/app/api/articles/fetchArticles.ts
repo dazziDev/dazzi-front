@@ -7,7 +7,7 @@ export const fetchArticles = async (): Promise<ArticleCategory[]> => {
     console.log('🔗 Base URL:', process.env.NEXT_PUBLIC_API_URL);
 
     const response = await axiosInstance.get<{ data: ArticleCategory[] }>(
-      '/article/list'
+      '/api/v1/web/article/list'
     );
 
     console.log('✅ API response 전체:', response);
@@ -24,6 +24,7 @@ export const fetchArticles = async (): Promise<ArticleCategory[]> => {
     // data 배열에서 ArticleCategory 객체들로 변환
     const categories = response.data.data.map((category) => ({
       categoryName: category.categoryName,
+      permalink: category.permalink,
       article: category.article, // articles 속성 사용
       categoryId: category.categoryId,
     }));

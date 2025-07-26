@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { fetchArticleDetail } from '@/app/api/articles/fetchArticleDetail';
+import ArticlePageSkeleton from '@/components/ui/ArticlePageSkeleton';
 import { useArticleDetailStore } from '@/store/useArticleDetailStore';
 
 import ArticleContent from './components/ArticleContent';
@@ -26,12 +27,15 @@ const ArticlePage = () => {
     }
   }, [slug, setArticleDetail]);
 
-  if (!articleDetail) return <p>Loading...</p>;
+  if (!articleDetail) return <ArticlePageSkeleton />;
 
   return (
     <div className="mt-14">
       <ArticleContent />
-      <RelatedArticles categoryId={articleDetail.categoryId} />
+      <RelatedArticles
+        categoryId={articleDetail.categoryId}
+        currentArticlePermalink={articleDetail.permalink}
+      />
       <CommentSection articleId={articleDetail.id} />
     </div>
   );

@@ -6,9 +6,13 @@ import { Article } from '@/app/types/article';
 
 interface RelatedArticlesProps {
   categoryId: number;
+  currentArticlePermalink: string;
 }
 
-const RelatedArticles: React.FC<RelatedArticlesProps> = ({ categoryId }) => {
+const RelatedArticles: React.FC<RelatedArticlesProps> = ({
+  categoryId,
+  currentArticlePermalink,
+}) => {
   const [relatedArticles, setRelatedArticles] = useState<Article[]>([]);
 
   useEffect(() => {
@@ -17,11 +21,14 @@ const RelatedArticles: React.FC<RelatedArticlesProps> = ({ categoryId }) => {
       const related =
         articles
           .find((category) => category.categoryId === categoryId)
-          ?.article.slice(0, 4) || [];
+          ?.article.filter(
+            (article) => article.permalink !== currentArticlePermalink
+          )
+          .slice(0, 4) || [];
       setRelatedArticles(related);
     };
     getRelatedArticles();
-  }, [categoryId]);
+  }, [categoryId, currentArticlePermalink]);
 
   return (
     <div className="p-8">

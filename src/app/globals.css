@@ -2,39 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 글로벌 CSS 변수 설정 */
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-} */
-
-/* 유저의 개인설정 다크 모드 지원 */
-@media (prefers-color-scheme: dark) {
+/* Vercel v0 스타일 CSS 변수 */
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255; /* 흰색 텍스트 */
-    --background-start-rgb: 0, 0, 0; /* 검정색 배경 */
-    --background-end-rgb: 0, 0, 0; /* 검정색 배경 */
+    /* Light theme colors */
+    --background: 255 255 255; /* Pure white */
+    --foreground: 9 9 11; /* Almost black */
+    --muted: 250 250 250; /* Very light gray */
+    --muted-foreground: 113 113 122; /* Medium gray */
+    --popover: 255 255 255;
+    --popover-foreground: 9 9 11;
+    --card: 255 255 255;
+    --card-foreground: 9 9 11;
+    --border: 229 229 234; /* Light gray border */
+    --input: 229 229 234;
+    --primary: 24 24 27; /* Dark primary */
+    --primary-foreground: 250 250 250;
+    --secondary: 244 244 245; /* Light secondary */
+    --secondary-foreground: 39 39 42;
+    --accent: 244 244 245;
+    --accent-foreground: 39 39 42;
+    --destructive: 239 68 68;
+    --destructive-foreground: 250 250 250;
+    --ring: 24 24 27;
+    --radius: 0.5rem;
   }
 }
 
-/* 기본적인 바디 스타일 설정 */
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* Vercel v0 스타일 기본 스타일 */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-medium;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* 스크롤바 스타일링 */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
+  }
 }
 
-/* 커스텀 유틸리티 클래스 */
-@layer utilities {
-  /* .text-balance {
-    text-wrap: balance;
-  } */
+/* 커스텀 컴포넌트 스타일 */
+@layer components {
+  /* 카드 컴포넌트 */
+  .card {
+    @apply bg-card text-card-foreground rounded-lg border shadow-sm;
+  }
+  
+  /* 버튼 기본 스타일 */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+  
+  /* 텍스트 스타일 */
+  .text-gradient {
+    @apply bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent;
+  }
+  
+  /* 호버 효과 */
+  .hover-lift {
+    @apply transform transition-all duration-200 hover:-translate-y-1 hover:shadow-lg;
+  }
+  
+  /* 글래스모피즘 효과 */
+  .glass {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20;
+  }
 }
 
+/* 폰트 및 에디터 스타일 import */
 @import '../styles/fonts.css';
 @import '../styles/editor.css';

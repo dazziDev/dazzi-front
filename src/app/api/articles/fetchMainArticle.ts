@@ -3,7 +3,7 @@ import { MainArticle } from '@/app/types/article';
 
 export const fetchMainArticle = async (): Promise<MainArticle[]> => {
   try {
-    const response = await axiosInstance.get('/article/mainList');
+    const response = await axiosInstance.get('/api/v1/web/article/mainList');
     console.log('response', response.data);
     return response.data.data;
   } catch (error) {

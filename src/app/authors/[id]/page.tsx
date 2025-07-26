@@ -1,5 +1,5 @@
 import AuthorInfo from '@/app/articles/[slug]/components/AuthorInfo';
-import ArticleCard from '@/app/categories/[category]/components/ArticleCard';
+import ArticleCard from '@/app/authors/components/ArticleCard';
 
 interface Author {
   id: number;
