@@ -18,7 +18,7 @@ export const fetchArticleDetail = async (
 ): Promise<ArticleDetail | null> => {
   try {
     const response = await axiosInstance.get<{ data: ArticleDetailAPI }>(
-      `/api/v1/admin/article/detail/${permalink}`
+      `/article/detail/${permalink}`
     );
     const data = response.data.data;
     const processedData: ArticleDetail = {
