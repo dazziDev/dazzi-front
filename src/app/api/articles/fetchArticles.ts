@@ -1,41 +1,40 @@
 import axiosInstance from '@/app/api/axiosInstance';
 import { ArticleCategory } from '@/app/types/article';
 
+import { fetchCategories } from '../categories/fetchCategories';
+
 export const fetchArticles = async (): Promise<ArticleCategory[]> => {
   try {
-    console.log('🚀 API 호출 시작: /article/list');
-    console.log('🔗 Base URL:', process.env.NEXT_PUBLIC_API_URL);
+    // 병렬로 기사 목록과 카테고리 정보를 가져오기
+    const [articlesResponse, categoriesInfo] = await Promise.all([
+      axiosInstance.get<{ data: ArticleCategory[] }>('/article/list'),
+      fetchCategories(),
+    ]);
 
-    const response = await axiosInstance.get<{ data: ArticleCategory[] }>(
-      '/article/list'
-    );
-
-    console.log('✅ API response 전체:', response);
-    console.log('📦 response.data:', response.data);
-    console.log('📊 response.status:', response.status);
-
-    if (!response.data || !response.data.data) {
-      console.error('❌ 응답 데이터 구조가 예상과 다름:', response.data);
+    if (!articlesResponse.data || !articlesResponse.data.data) {
+      console.error(
+        '❌ 응답 데이터 구조가 예상과 다름:',
+        articlesResponse.data
+      );
       return [];
     }
 
-    console.log('📋 Raw categories data:', response.data.data);
+    // data 배열에서 ArticleCategory 객체들로 변환하면서 카테고리 정보 병합
+    const categories = articlesResponse.data.data.map((category) => {
+      // categoryId로 해당 카테고리 정보 찾기
+      const categoryInfo = categoriesInfo.find(
+        (cat) => cat.categoryId === category.categoryId
+      );
 
-    // data 배열에서 ArticleCategory 객체들로 변환
-    const categories = response.data.data.map((category) => ({
-      categoryName: category.categoryName,
-      permalink: category.permalink,
-      article: category.article, // articles 속성 사용
-      categoryId: category.categoryId,
-    }));
-
-    console.log('🔄 Transformed categories:', categories);
-    console.log('📝 총 카테고리 수:', categories.length);
+      return {
+        categoryName: category.categoryName,
+        permalink: categoryInfo?.permalink || `category-${category.categoryId}`, // fallback으로 categoryId 사용
+        article: category.article,
+        categoryId: category.categoryId,
+      };
+    });
 
     categories.forEach((cat, index) => {
-      console.log(
-        `📂 카테고리 ${index + 1}: ${cat.categoryName} (${cat.article?.length || 0}개 기사)`
-      );
       if (cat.article && cat.article.length > 0) {
         cat.article.forEach((article, articleIndex) => {
           console.log(`  📄 기사 ${articleIndex + 1}: ${article.title}`);

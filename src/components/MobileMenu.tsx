@@ -31,7 +31,10 @@ const MobileMenu = () => {
 
   return (
     <div className="">
-      <button onClick={toggleMenu} className="focus:outline-none text-white">
+      <button
+        onClick={toggleMenu}
+        className="focus:outline-none text-foreground"
+      >
         <span className="text-3xl">&#9776;</span>
       </button>
 
@@ -44,18 +47,18 @@ const MobileMenu = () => {
               exit="exit"
               variants={menuVariants}
               transition={{ duration: 0.5 }}
-              className="fixed inset-0 bg-gray-900 flex flex-col pb-6 z-50 h-[calc(100vh-56px)]"
+              className="fixed inset-0 bg-background/95 backdrop-blur-md flex flex-col pb-6 z-50 h-[calc(100vh-56px)]"
             >
               {/* 상단 로고 및 닫기 버튼 */}
-              <div className="flex items-center justify-between w-full h-[54px] bg-black">
+              <div className="flex items-center justify-between w-full h-[54px] bg-background border-b border-border">
                 <Link href="/" onClick={toggleMenu}>
-                  <span className="text-2xl font-bold text-white pl-3">
+                  <span className="text-2xl font-bold text-foreground pl-3">
                     dazzi.
                   </span>
                 </Link>
                 <button
                   onClick={toggleMenu}
-                  className="text-4xl text-white pr-3"
+                  className="text-4xl text-foreground pr-3"
                 >
                   &times;
                 </button>
@@ -69,13 +72,13 @@ const MobileMenu = () => {
                     href={`/categories/${encodeURIComponent(category.permalink)}`}
                     onClick={toggleMenu}
                   >
-                    <span className="block font-bold text-[24px] text-white">
+                    <span className="block font-bold text-[24px] text-foreground">
                       {category.categoryName}
                     </span>
                   </Link>
                 ))}
                 <Link href="/editors" onClick={toggleMenu}>
-                  <span className="block font-bold text-[24px] text-white">
+                  <span className="block font-bold text-[24px] text-foreground">
                     다찌들
                   </span>
                 </Link>

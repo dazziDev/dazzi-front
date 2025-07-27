@@ -101,63 +101,40 @@ const EditorsPage = () => {
 
         {/* 작성자 그리드 */}
         {editors.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {editors.map((editor) => (
               <Link
                 key={editor.editorId}
                 href={`/editors/${editor.editorId}`}
-                className="group"
+                className="group block"
               >
-                <div className="bg-card border border-border rounded-3xl p-8 text-center hover:shadow-2xl hover:shadow-primary/5 hover:border-primary/20 transition-all duration-500 transform hover:-translate-y-2">
-                  {/* 프로필 이미지 */}
-                  <div className="relative mb-6">
-                    <div className="w-32 h-32 mx-auto relative">
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full group-hover:from-primary/30 group-hover:to-primary/10 transition-all duration-500" />
-                      <Image
-                        src={editor.introduceImage || '/default-avatar.png'}
-                        alt={editor.editorName}
-                        width={128}
-                        height={128}
-                        className="w-full h-full object-cover rounded-full border-4 border-background shadow-lg relative z-10"
-                        unoptimized
-                      />
-                    </div>
-                    {/* 장식 요소 */}
-                    <div className="absolute top-0 right-0 w-6 h-6 bg-primary rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-                    <div className="absolute bottom-2 left-2 w-4 h-4 bg-primary/30 rounded-full opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                <div className="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-primary/30 hover:shadow-lg transition-all duration-300 group-hover:scale-[1.02]">
+                  {/* 사각형 이미지 */}
+                  <div className="aspect-[16/9] overflow-hidden bg-gray-100 dark:bg-gray-800">
+                    <Image
+                      src={editor.introduceImage || '/default-avatar.png'}
+                      alt={editor.editorName}
+                      width={400}
+                      height={225}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      unoptimized
+                      onError={(e) => {
+                        e.currentTarget.src = '/default-avatar.png';
+                      }}
+                    />
                   </div>
 
-                  {/* 작성자 정보 */}
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                  {/* 콘텐츠 */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors mb-3">
                       {editor.editorName}
                     </h3>
 
                     {editor.description && (
-                      <p className="text-muted-foreground leading-relaxed line-clamp-3 text-sm">
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-3 mb-4">
                         {editor.description}
                       </p>
                     )}
-
-                    {/* 액션 버튼 */}
-                    <div className="pt-4">
-                      <span className="inline-flex items-center text-sm font-medium text-primary group-hover:text-primary-foreground group-hover:bg-primary px-4 py-2 rounded-full border border-primary/20 group-hover:border-primary transition-all duration-300">
-                        프로필 보기
-                        <svg
-                          className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </span>
-                    </div>
                   </div>
                 </div>
               </Link>

@@ -56,3 +56,172 @@
 }
 
 /* 이미지와 raw-html-embed는 스타일 그대로 */
+
+/* インライン画像スタイル - エディターで設定されたサイズ調整を反映 */
+.prose .image-inline,
+.prose .image.image-inline,
+.prose figure.image.image-inline {
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 0.25em !important;
+  max-width: 100% !important;
+}
+
+.prose .image-inline img,
+.prose .image.image-inline img,
+.prose figure.image.image-inline img {
+  display: inline !important;
+  vertical-align: middle !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* エディターで設定されたwidthスタイルが適用されたインライン画像 */
+.prose .image-inline[style*="width"],
+.prose .image.image-inline[style*="width"],
+.prose figure.image.image-inline[style*="width"] {
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 0.25em !important;
+  max-width: 200px !important;
+}
+
+.prose .image-inline[style*="width"] img,
+.prose .image.image-inline[style*="width"] img,
+.prose figure.image.image-inline[style*="width"] img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 200px !important;
+}
+
+/* pタグ内の画像はインラインとして処理 */
+.prose p img {
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 0.25em !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* pタグ内でwidthスタイルがある画像 - 인라인 스타일 강제 오버라이드 */
+.prose p img[style*="width"] {
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 0.25em !important;
+  max-width: 200px !important;
+  height: auto !important;
+  width: auto !important;
+}
+
+/* 基本画像はブロック保持（pタグ外の画像のみ） */
+.prose .image:not(.image-inline),
+.prose > img:not([style*="width"]),
+.prose img {
+  display: block;
+  margin: 1em auto;
+  width: auto;
+  height: auto;
+  max-width: 100% !important;
+  max-height: 80vh;
+}
+
+/* 全ての画像要素にレスポンシブ制御を適用 - 인라인 스타일 오버라이드 */
+.prose * img[style*="width"] {
+  max-width: 200px !important;
+  height: auto !important;
+  width: auto !important;
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 0.25em !important;
+}
+
+.prose * img {
+  max-width: 200px !important;
+  height: auto !important;
+  width: auto !important;
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 0.25em !important;
+}
+
+/* フィギュア要素内の画像 - 인라인 스타일 오버라이드 */
+.prose figure img[style*="width"] {
+  max-width: 200px !important;
+  height: auto !important;
+  width: auto !important;
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 0.25em !important;
+}
+
+.prose figure img {
+  max-width: 200px !important;
+  height: auto !important;
+  width: auto !important;
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 0.25em !important;
+}
+
+/* 단독画像（pタグ内に画像만 있는 경우）はブロック表示 */
+.prose p img:only-child {
+  display: block !important;
+  margin: 1em auto !important;
+  max-width: 100% !important;
+  width: auto !important;
+}
+
+/* prose-center 클래스용 최고 우선순위 CSS - 인라인 스타일 오버라이드 */
+.prose.prose-center img[style*="width"] {
+  max-width: 200px !important;
+  height: auto !important;
+  width: auto !important;
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 0.25em !important;
+}
+
+.prose.prose-center p img[style*="width"] {
+  max-width: 200px !important;
+  height: auto !important;
+  width: auto !important;
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 0.25em !important;
+}
+
+.prose.prose-center img.image_resized[style*="width"] {
+  max-width: 200px !important;
+  height: auto !important;
+  width: auto !important;
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 0.25em !important;
+}
+
+/* prose-center의 모든 이미지에 기본 인라인 설정 */
+.prose.prose-center img {
+  max-width: 200px !important;
+  height: auto !important;
+  width: auto !important;
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 0.25em !important;
+}
+
+.prose.prose-center p img {
+  max-width: 200px !important;
+  height: auto !important;
+  width: auto !important;
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 0.25em !important;
+}
+
+/* prose-center에서 단독 이미지는 블록 표시 */
+.prose.prose-center p img:only-child {
+  display: block !important;
+  margin: 1em auto !important;
+  max-width: 100% !important;
+  width: auto !important;
+}

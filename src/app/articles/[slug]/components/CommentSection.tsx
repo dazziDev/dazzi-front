@@ -16,8 +16,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({ articleId }) => {
   };
 
   return (
-    <div className="p-8">
-      <h3 className="text-2xl font-bold mb-4">코멘트</h3>
+    <div className="w-full max-w-none px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-8">
+      <h3 className="text-2xl font-bold mb-6">코멘트</h3>
       <div className="mb-4">
         <textarea
           className="w-full p-2 border rounded"

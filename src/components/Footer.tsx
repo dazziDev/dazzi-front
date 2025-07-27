@@ -4,23 +4,16 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { fetchCategories } from '@/app/api/categories/fetchCategories';
-import { fetchEditors } from '@/app/api/editors/fetchEditors';
 import { Category } from '@/app/types/category';
-import { Editor } from '@/app/types/editor';
 
 const Footer = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [editors, setEditors] = useState<Editor[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [categoriesData, editorsData] = await Promise.all([
-          fetchCategories(),
-          fetchEditors(),
-        ]);
+        const categoriesData = await fetchCategories();
         setCategories(categoriesData);
-        setEditors(editorsData);
       } catch (error) {
         console.error('푸터 데이터 로딩 실패:', error);
       }
@@ -61,38 +54,18 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* 다찌들 섹션 */}
+          {/* 에디터 섹션 */}
           <div className="col-span-1">
-            <h3 className="font-semibold text-foreground mb-4">다찌들</h3>
+            <h3 className="font-semibold text-foreground mb-4">에디터</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/editors"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  전체 다찌들
+                  에디터 소개
                 </Link>
               </li>
-              {editors.slice(0, 5).map((editor) => (
-                <li key={editor.editorId}>
-                  <Link
-                    href={`/editors/${editor.editorId}`}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {editor.editorName}
-                  </Link>
-                </li>
-              ))}
-              {editors.length > 5 && (
-                <li>
-                  <Link
-                    href="/editors"
-                    className="text-sm text-primary hover:text-primary/80 transition-colors"
-                  >
-                    더보기 →
-                  </Link>
-                </li>
-              )}
             </ul>
           </div>
 
@@ -100,24 +73,6 @@ const Footer = () => {
           <div className="col-span-1">
             <h3 className="font-semibold text-foreground mb-4">정보</h3>
             <ul className="space-y-2">
-              <li>
-                <a
-                  href="mailto:contact@dazzi.com"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  문의하기
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Instagram
-                </a>
-              </li>
               <li>
                 <a
                   href="https://youtube.com/@Dazzi_mawari"

@@ -5,4 +5,9 @@ export interface Editor {
   articleImage: string;
   introduceImage: string;
   createdBy: string;
+  instagramUrl?: string;
+  youtubeUrl?: string;
+  xUrl?: string;
+  linkedinUrl?: string;
+  websiteUrl?: string;
 }

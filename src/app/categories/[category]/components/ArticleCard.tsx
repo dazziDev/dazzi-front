@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { Article } from '@/app/types/article';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 
 type ArticleCardProps = {
   article: Article;
@@ -11,13 +11,12 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
   return (
     <Link href={`/articles/${article.permalink}`} className="block group">
       <article className="card hover-lift p-0 overflow-hidden h-full">
-        {/* 이미지 */}
-        <div className="relative aspect-[4/3] overflow-hidden">
-          <Image
-            src={article.imageUrl}
+        {/* 이미지 - 반응형 */}
+        <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-800">
+          <ResponsiveImage
+            article={article}
             alt={article.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            className="transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>

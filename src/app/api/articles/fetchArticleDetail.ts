@@ -20,14 +20,17 @@ export const fetchArticleDetail = async (
     const response = await axiosInstance.get<{ data: ArticleDetailAPI }>(
       `/article/detail/${permalink}`
     );
+
     const data = response.data.data;
+
     const processedData: ArticleDetail = {
       ...data,
       imageUrl: parseImageUrl(data.imageUrl), // 문자열을 배열로 변환
     };
+
     return processedData;
   } catch (error) {
-    console.error('Failed to fetch article detail:', error);
+    console.error('❌ Failed to fetch article detail:', error);
     return null;
   }
 };

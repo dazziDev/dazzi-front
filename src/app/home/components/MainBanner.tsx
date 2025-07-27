@@ -4,12 +4,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { fetchMainArticle } from '@/app/api/articles/fetchMainArticle';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import MainBannerSkeleton from '@/components/ui/MainBannerSkeleton';
 import { useMainArticleStore } from '@/store/useMainArticleStore';
 
@@ -55,11 +55,10 @@ const MainBanner = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
 
-              <Image
-                src={article.imageUrl || ''}
+              <ResponsiveImage
+                article={article}
                 alt={article.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-contain transition-transform duration-700 group-hover:scale-105 bg-gray-900"
                 priority={idx === 0}
               />
 

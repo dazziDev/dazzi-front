@@ -14,7 +14,7 @@ interface CategoryPageData {
 }
 
 const CategoryPage = () => {
-  const { category } = useParams();
+  const params = useParams();
   const [categoryData, setCategoryData] = useState<CategoryPageData | null>(
     null
   );
@@ -23,13 +23,23 @@ const CategoryPage = () => {
 
   useEffect(() => {
     const loadCategoryData = async () => {
-      if (!category) return;
+      if (!params.category) {
+        setError('카테고리 파라미터가 없습니다');
+        setLoading(false);
+        return;
+      }
+
+      // params.category가 배열일 수도 있으므로 처리
+      const categoryParam = Array.isArray(params.category)
+        ? params.category[0]
+        : params.category;
 
       try {
         setLoading(true);
-        const data = await fetchArticlesByCategory(category as string);
+        const data = await fetchArticlesByCategory(categoryParam);
         setCategoryData(data);
       } catch (err) {
+        console.error('CategoryPage - 에러:', err);
         setError(
           err instanceof Error ? err.message : '데이터를 불러올 수 없습니다'
         );
@@ -39,7 +49,7 @@ const CategoryPage = () => {
     };
 
     loadCategoryData();
-  }, [category]);
+  }, [params]);
 
   if (loading) {
     return (
@@ -101,14 +111,20 @@ const CategoryPage = () => {
         {/* 기사 목록 */}
         {categoryData.articles.length > 0 ? (
           <div className="max-w-4xl mx-auto space-y-8">
-            {categoryData.articles.map((article, index) => (
-              <div
-                key={article.id || index}
-                className="group bg-card border border-border rounded-xl p-8 hover:shadow-lg hover:border-primary/20 transition-all duration-300"
-              >
-                <ArticleCard article={article} />
-              </div>
-            ))}
+            {categoryData.articles
+              .sort(
+                (a, b) =>
+                  new Date(b.updateAt).getTime() -
+                  new Date(a.updateAt).getTime()
+              )
+              .map((article, index) => (
+                <div
+                  key={article.id || index}
+                  className="group bg-card border border-border rounded-xl p-8 hover:shadow-lg hover:border-primary/20 transition-all duration-300"
+                >
+                  <ArticleCard article={article} />
+                </div>
+              ))}
           </div>
         ) : (
           <div className="text-center py-20">

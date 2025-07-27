@@ -9,6 +9,7 @@ export interface ArticleDetailAPI {
   imageUrl: string;
   permalink: string;
   categoryId: number;
+  editorId: string;
   editorName: string;
 }
 
@@ -23,5 +24,6 @@ export interface ArticleDetail {
   imageUrl: string[];
   permalink: string;
   categoryId: number;
+  editorId: string;
   editorName: string;
 }

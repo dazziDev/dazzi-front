@@ -10,6 +10,24 @@ export const fetchArticlesByCategory = async (
   articles: Article[];
 }> => {
   try {
+    // categoryPermalink가 undefined이거나 빈 문자열인 경우 처리
+    if (
+      !categoryPermalink ||
+      categoryPermalink === 'undefined' ||
+      categoryPermalink === 'null' ||
+      categoryPermalink === 'unknown'
+    ) {
+      console.error('fetchArticlesByCategory - 잘못된 카테고리 파라미터:', {
+        input: categoryPermalink,
+        type: typeof categoryPermalink,
+        isUndefined: categoryPermalink === undefined,
+        isStringUndefined: categoryPermalink === 'undefined',
+        isStringNull: categoryPermalink === 'null',
+        isUnknown: categoryPermalink === 'unknown',
+      });
+      throw new Error('카테고리 파라미터가 없습니다');
+    }
+
     // URL 디코딩 처리
     const decodedPermalink = decodeURIComponent(categoryPermalink);
 
@@ -18,15 +36,18 @@ export const fetchArticlesByCategory = async (
 
     // permalink로 카테고리 찾기
     const targetCategoryInfo = allCategoriesInfo.find((category) => {
-      // permalink로 정확히 매칭
+      // permalink, categoryName, 또는 category-{id} 형태로 매칭
       return (
         category.permalink === decodedPermalink ||
-        category.categoryName === decodedPermalink
+        category.categoryName === decodedPermalink ||
+        `category-${category.categoryId}` === decodedPermalink
       );
     });
 
     if (!targetCategoryInfo) {
       console.error('카테고리를 찾을 수 없습니다:', decodedPermalink);
+      console.error('allCategoriesInfo type:', typeof allCategoriesInfo);
+      console.error('allCategoriesInfo length:', allCategoriesInfo?.length);
       console.error(
         '사용 가능한 카테고리:',
         allCategoriesInfo.map((c) => ({
