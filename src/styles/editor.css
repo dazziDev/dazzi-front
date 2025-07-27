@@ -77,18 +77,18 @@
 }
 
 /* エディターで設定されたwidthスタイルが適用されたインライン画像 */
-.prose .image-inline[style*="width"],
-.prose .image.image-inline[style*="width"],
-.prose figure.image.image-inline[style*="width"] {
+.prose .image-inline[style*='width'],
+.prose .image.image-inline[style*='width'],
+.prose figure.image.image-inline[style*='width'] {
   display: inline !important;
   vertical-align: middle !important;
   margin: 0 0.25em !important;
   max-width: 200px !important;
 }
 
-.prose .image-inline[style*="width"] img,
-.prose .image.image-inline[style*="width"] img,
-.prose figure.image.image-inline[style*="width"] img {
+.prose .image-inline[style*='width'] img,
+.prose .image.image-inline[style*='width'] img,
+.prose figure.image.image-inline[style*='width'] img {
   width: auto !important;
   height: auto !important;
   max-width: 200px !important;
@@ -104,7 +104,7 @@
 }
 
 /* pタグ内でwidthスタイルがある画像 - 인라인 스타일 강제 오버라이드 */
-.prose p img[style*="width"] {
+.prose p img[style*='width'] {
   display: inline !important;
   vertical-align: middle !important;
   margin: 0 0.25em !important;
@@ -115,7 +115,7 @@
 
 /* 基本画像はブロック保持（pタグ外の画像のみ） */
 .prose .image:not(.image-inline),
-.prose > img:not([style*="width"]),
+.prose > img:not([style*='width']),
 .prose img {
   display: block;
   margin: 1em auto;
@@ -126,7 +126,7 @@
 }
 
 /* 全ての画像要素にレスポンシブ制御を適用 - 인라인 스타일 오버라이드 */
-.prose * img[style*="width"] {
+.prose * img[style*='width'] {
   max-width: 200px !important;
   height: auto !important;
   width: auto !important;
@@ -145,7 +145,7 @@
 }
 
 /* フィギュア要素内の画像 - 인라인 스타일 오버라이드 */
-.prose figure img[style*="width"] {
+.prose figure img[style*='width'] {
   max-width: 200px !important;
   height: auto !important;
   width: auto !important;
@@ -172,7 +172,7 @@
 }
 
 /* prose-center 클래스용 최고 우선순위 CSS - 인라인 스타일 오버라이드 */
-.prose.prose-center img[style*="width"] {
+.prose.prose-center img[style*='width'] {
   max-width: 200px !important;
   height: auto !important;
   width: auto !important;
@@ -181,7 +181,7 @@
   margin: 0 0.25em !important;
 }
 
-.prose.prose-center p img[style*="width"] {
+.prose.prose-center p img[style*='width'] {
   max-width: 200px !important;
   height: auto !important;
   width: auto !important;
@@ -190,7 +190,7 @@
   margin: 0 0.25em !important;
 }
 
-.prose.prose-center img.image_resized[style*="width"] {
+.prose.prose-center img.image_resized[style*='width'] {
   max-width: 200px !important;
   height: auto !important;
   width: auto !important;
