@@ -45,7 +45,7 @@
     /* モバイルでのオーバースクロールバウンス効果を無効化 */
     overscroll-behavior: none;
   }
-  
+
   html {
     /* iOS Safariでのラバーバンド効果を制御 */
     overscroll-behavior: none;
