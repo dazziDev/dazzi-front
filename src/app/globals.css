@@ -42,6 +42,14 @@
       'calt' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* モバイルでのオーバースクロールバウンス効果を無効化 */
+    overscroll-behavior: none;
+  }
+  
+  html {
+    /* iOS Safariでのラバーバンド効果を制御 */
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* 스크롤바 스타일링 */

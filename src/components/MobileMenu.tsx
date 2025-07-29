@@ -47,7 +47,7 @@ const MobileMenu = () => {
               exit="exit"
               variants={menuVariants}
               transition={{ duration: 0.5 }}
-              className="fixed inset-0 bg-background/95 backdrop-blur-md flex flex-col pb-6 z-50 h-[calc(100vh-56px)]"
+              className="fixed inset-0 bg-background/95 backdrop-blur-md flex flex-col z-50 h-[calc(100vh-56px)]"
             >
               {/* 상단 로고 및 닫기 버튼 */}
               <div className="flex items-center justify-between w-full h-[54px] bg-background border-b border-border">
@@ -65,7 +65,24 @@ const MobileMenu = () => {
               </div>
 
               {/* 카테고리 메뉴 항목 */}
-              <nav className="flex flex-col items-end mt-[24px] space-y-[24px] flex-grow pl-6 pr-6">
+              <nav className="flex flex-col items-end mt-[24px] space-y-[24px] flex-grow pl-6 pr-6 overflow-y-auto">
+                {/* 고정 메뉴 - 다찌들 */}
+                <Link href="/editors" onClick={toggleMenu}>
+                  <span className="block font-bold text-[24px] text-foreground">
+                    다찌들
+                  </span>
+                </Link>
+
+                {/* 카테고리 구분선 */}
+                {categories.length > 0 && (
+                  <div className="w-full border-t border-border/30 my-2">
+                    <span className="text-sm text-muted-foreground">
+                      カテゴリー
+                    </span>
+                  </div>
+                )}
+
+                {/* 카테고리 목록 */}
                 {categories.map((category) => (
                   <Link
                     key={category.categoryId}
@@ -77,23 +94,10 @@ const MobileMenu = () => {
                     </span>
                   </Link>
                 ))}
-                <Link href="/editors" onClick={toggleMenu}>
-                  <span className="block font-bold text-[24px] text-foreground">
-                    다찌들
-                  </span>
-                </Link>
               </nav>
 
               {/* 하단 아이콘 */}
-              <div className="flex space-x-[16px] mt-auto justify-center w-full pb-6">
-                <Link href="https://instagram.com" onClick={toggleMenu}>
-                  <Image
-                    src="/img/icons/Instagram_R_Clr.webp"
-                    width={48}
-                    height={48}
-                    alt="instagram"
-                  />
-                </Link>
+              <div className="flex justify-center w-full pt-8 pb-20 border-t border-border/30">
                 <Link
                   href="https://youtube.com/@Dazzi_mawari"
                   onClick={toggleMenu}
