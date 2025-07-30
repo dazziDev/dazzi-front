@@ -9,7 +9,14 @@ const parseImageUrl = (imageUrl: string): string[] => {
   // 대괄호 제거
   const trimmed = imageUrl.slice(1, -1);
   // 쉼표로 분리하고 공백 및 따옴표 제거
-  const urls = trimmed.split(',').map((url) => url.trim().replace(/['"]/g, ''));
+  const urls = trimmed.split(',').map((url) => {
+    let cleanUrl = url.trim().replace(/['"]/g, '');
+    // https가 ttps로 잘못 파싱된 경우 수정
+    if (cleanUrl.startsWith('ttps://')) {
+      cleanUrl = 'h' + cleanUrl;
+    }
+    return cleanUrl;
+  });
   return urls;
 };
 

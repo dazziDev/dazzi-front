@@ -19,7 +19,15 @@ const ArticleContent: React.FC = () => {
 
       imageUrls.slice(1).forEach((url, index) => {
         const placeholder = `__IMAGE_PLACEHOLDER_${index + 1}__`;
-        textContent = textContent.replace(new RegExp(placeholder, 'g'), url);
+        // https가 ttps로 잘못된 경우 수정
+        let correctedUrl = url;
+        if (correctedUrl.startsWith('ttps://')) {
+          correctedUrl = 'h' + correctedUrl;
+        }
+        textContent = textContent.replace(
+          new RegExp(placeholder, 'g'),
+          correctedUrl
+        );
       });
 
       setProcessedText(textContent);
