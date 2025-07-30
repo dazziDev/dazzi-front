@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { fetchEditorDetail } from '@/app/api/editors/fetchEditorDetail';
 import { Editor } from '@/app/types/editor';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import { useArticleDetailStore } from '@/store/useArticleDetailStore';
 
 const ArticleContent: React.FC = () => {
@@ -17,7 +18,25 @@ const ArticleContent: React.FC = () => {
       const imageUrls = articleDetail.imageUrl;
       let textContent = articleDetail.text;
 
-      imageUrls.slice(1).forEach((url, index) => {
+      // 듀얼 썸네일 시스템 확인
+      let startIndex = 0;
+      const hasLandscape =
+        articleDetail.landscapeImageUrl &&
+        articleDetail.landscapeImageUrl.trim() !== '';
+      const hasPortrait =
+        articleDetail.portraitImageUrl &&
+        articleDetail.portraitImageUrl.trim() !== '';
+
+      if (hasLandscape && hasPortrait) {
+        // 듀얼 썸네일인 경우: 첫 2개는 썸네일
+        startIndex = 2;
+      } else if (hasLandscape || hasPortrait || imageUrls.length > 0) {
+        // 단일 썸네일인 경우
+        startIndex = 1;
+      }
+
+      // 본문 이미지 플레이스홀더 교체
+      imageUrls.slice(startIndex).forEach((url, index) => {
         const placeholder = `__IMAGE_PLACEHOLDER_${index + 1}__`;
         // https가 ttps로 잘못된 경우 수정
         let correctedUrl = url;
@@ -55,17 +74,22 @@ const ArticleContent: React.FC = () => {
 
   if (!articleDetail) return null;
 
-  const mainImage = articleDetail.imageUrl[0];
+  // 반응형 이미지를 위한 article 객체 생성
+  const articleForImage = {
+    ...articleDetail,
+    imageUrl: articleDetail.imageUrl[0], // 기본 이미지
+    publishTime: new Date(articleDetail.updateAt), // 게시 시간을 Date 객체로 변환
+    updateAt: new Date(articleDetail.updateAt), // updateAt도 Date 객체로 변환
+  };
 
   return (
     <div>
-      {/* 메인 이미지 배너 - PC에서 더 높게 */}
+      {/* 메인 이미지 배너 - 반응형 이미지 사용 */}
       <div className="relative w-full h-[300px] md:h-[500px] lg:h-[600px] xl:h-[700px] 2xl:h-[800px] overflow-hidden">
-        <Image
-          src={mainImage}
+        <ResponsiveImage
+          article={articleForImage}
           alt={articleDetail.title}
           fill
-          className="object-cover"
           priority
         />
       </div>
@@ -98,9 +122,9 @@ const ArticleContent: React.FC = () => {
                 href={`/editors/${articleDetail.editorId}`}
                 className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 hover:opacity-80 transition-opacity"
               >
-                {editorDetail?.introduceImage ? (
+                {editorDetail?.articleImage ? (
                   <Image
-                    src={editorDetail.introduceImage}
+                    src={editorDetail.articleImage}
                     alt={articleDetail.editorName}
                     width={64}
                     height={64}
