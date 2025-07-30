@@ -1,5 +1,6 @@
 import axiosInstance from '@/app/api/axiosInstance';
 import { ArticleCategory } from '@/app/types/article';
+import { fixObjectImageUrls } from '@/lib/urlUtils';
 
 import { fetchCategories } from '../categories/fetchCategories';
 
@@ -26,10 +27,15 @@ export const fetchArticles = async (): Promise<ArticleCategory[]> => {
         (cat) => cat.categoryId === category.categoryId
       );
 
+      // 각 기사의 이미지 URL들을 수정
+      const fixedArticles = category.article.map(article => 
+        fixObjectImageUrls(article, ['imageUrl', 'landscapeImageUrl', 'portraitImageUrl'])
+      );
+
       return {
         categoryName: category.categoryName,
         permalink: categoryInfo?.permalink || `category-${category.categoryId}`, // fallback으로 categoryId 사용
-        article: category.article,
+        article: fixedArticles,
         categoryId: category.categoryId,
       };
     });

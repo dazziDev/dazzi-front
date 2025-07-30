@@ -1,5 +1,6 @@
 import axiosInstance from '@/app/api/axiosInstance';
 import { Editor } from '@/app/types/editor';
+import { fixObjectImageUrls } from '@/lib/urlUtils';
 
 export const fetchEditorDetail = async (editorId: string): Promise<Editor> => {
   try {
@@ -9,7 +10,10 @@ export const fetchEditorDetail = async (editorId: string): Promise<Editor> => {
       `/editor/${editorId}?_t=${timestamp}`
     );
 
-    return response.data;
+    // 에디터의 이미지 URL 수정
+    const fixedEditor = fixObjectImageUrls(response.data, ['articleImage', 'introduceImage']);
+    
+    return fixedEditor;
   } catch (error) {
     console.error('❌ 작성자 상세 정보 가져오기 실패:', error);
     throw error;
