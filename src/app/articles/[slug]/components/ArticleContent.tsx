@@ -37,7 +37,7 @@ const ArticleContent: React.FC = () => {
 
       // 본문 이미지 플레이스홀더 교체
       imageUrls.slice(startIndex).forEach((url, index) => {
-        const placeholder = `__IMAGE_PLACEHOLDER_${index + 1}__`;
+        const placeholder = `__IMAGE_PLACEHOLDER_${index}__`;
         // https가 ttps로 잘못된 경우 수정
         let correctedUrl = url;
         if (correctedUrl.startsWith('ttps://')) {
