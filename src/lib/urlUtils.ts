@@ -9,7 +9,7 @@
  */
 export function fixTtpsUrl(url: string | null | undefined): string {
   if (!url) return '';
-  
+
   const cleanUrl = url.trim();
   if (cleanUrl.startsWith('ttps://')) {
     return 'h' + cleanUrl;
@@ -23,7 +23,7 @@ export function fixTtpsUrl(url: string | null | undefined): string {
  * @returns 수정된 URL 문자열 배열
  */
 export function fixTtpsUrls(urls: (string | null | undefined)[]): string[] {
-  return urls.map(url => fixTtpsUrl(url));
+  return urls.map((url) => fixTtpsUrl(url));
 }
 
 /**
@@ -33,16 +33,16 @@ export function fixTtpsUrls(urls: (string | null | undefined)[]): string[] {
  * @returns 수정된 객체
  */
 export function fixObjectImageUrls<T extends Record<string, any>>(
-  obj: T, 
+  obj: T,
   imageFields: (keyof T)[]
 ): T {
   const fixedObj = { ...obj };
-  
-  imageFields.forEach(field => {
+
+  imageFields.forEach((field) => {
     if (typeof fixedObj[field] === 'string') {
       fixedObj[field] = fixTtpsUrl(fixedObj[field] as string) as T[keyof T];
     }
   });
-  
+
   return fixedObj;
 }

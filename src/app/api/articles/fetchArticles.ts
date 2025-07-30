@@ -28,8 +28,12 @@ export const fetchArticles = async (): Promise<ArticleCategory[]> => {
       );
 
       // 각 기사의 이미지 URL들을 수정
-      const fixedArticles = category.article.map(article => 
-        fixObjectImageUrls(article, ['imageUrl', 'landscapeImageUrl', 'portraitImageUrl'])
+      const fixedArticles = category.article.map((article) =>
+        fixObjectImageUrls(article, [
+          'imageUrl',
+          'landscapeImageUrl',
+          'portraitImageUrl',
+        ])
       );
 
       return {

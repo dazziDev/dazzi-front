@@ -11,8 +11,11 @@ export const fetchEditorDetail = async (editorId: string): Promise<Editor> => {
     );
 
     // 에디터의 이미지 URL 수정
-    const fixedEditor = fixObjectImageUrls(response.data, ['articleImage', 'introduceImage']);
-    
+    const fixedEditor = fixObjectImageUrls(response.data, [
+      'articleImage',
+      'introduceImage',
+    ]);
+
     return fixedEditor;
   } catch (error) {
     console.error('❌ 작성자 상세 정보 가져오기 실패:', error);

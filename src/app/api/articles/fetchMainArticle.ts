@@ -6,12 +6,16 @@ export const fetchMainArticle = async (): Promise<MainArticle[]> => {
   try {
     const response = await axiosInstance.get('/article/mainList');
     console.log('response', response.data);
-    
+
     // 모든 메인 기사의 이미지 URL 수정
-    const fixedArticles = response.data.data.map((article: MainArticle) => 
-      fixObjectImageUrls(article, ['imageUrl', 'landscapeImageUrl', 'portraitImageUrl'])
+    const fixedArticles = response.data.data.map((article: MainArticle) =>
+      fixObjectImageUrls(article, [
+        'imageUrl',
+        'landscapeImageUrl',
+        'portraitImageUrl',
+      ])
     );
-    
+
     return fixedArticles;
   } catch (error) {
     console.error('Failed to fetch main article:', error);

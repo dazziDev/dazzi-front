@@ -34,12 +34,16 @@ export const fetchArticleDetail = async (
       ...data,
       imageUrl: parseImageUrl(data.imageUrl), // 문자열을 배열로 변환
       // landscapeImageUrl, portraitImageUrl도 ttps 수정
-      landscapeImageUrl: data.landscapeImageUrl ? 
-        (data.landscapeImageUrl.startsWith('ttps://') ? 'h' + data.landscapeImageUrl : data.landscapeImageUrl) : 
-        undefined,
-      portraitImageUrl: data.portraitImageUrl ? 
-        (data.portraitImageUrl.startsWith('ttps://') ? 'h' + data.portraitImageUrl : data.portraitImageUrl) : 
-        undefined,
+      landscapeImageUrl: data.landscapeImageUrl
+        ? data.landscapeImageUrl.startsWith('ttps://')
+          ? 'h' + data.landscapeImageUrl
+          : data.landscapeImageUrl
+        : undefined,
+      portraitImageUrl: data.portraitImageUrl
+        ? data.portraitImageUrl.startsWith('ttps://')
+          ? 'h' + data.portraitImageUrl
+          : data.portraitImageUrl
+        : undefined,
     };
 
     return processedData;
