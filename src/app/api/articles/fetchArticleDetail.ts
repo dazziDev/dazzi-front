@@ -8,8 +8,8 @@ import { ArticleDetail, ArticleDetailAPI } from '@/app/types/articleDetail';
 const parseImageUrl = (imageUrl: string): string[] => {
   // 대괄호 제거
   const trimmed = imageUrl.slice(1, -1);
-  // 쉼표로 분리하고 공백 제거
-  const urls = trimmed.split(',').map((url) => url.trim());
+  // 쉼표로 분리하고 공백 및 따옴표 제거
+  const urls = trimmed.split(',').map((url) => url.trim().replace(/['"]/g, ''));
   return urls;
 };
 
