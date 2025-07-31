@@ -36,17 +36,27 @@ const ArticleContent: React.FC = () => {
       }
 
       // 본문 이미지 플레이스홀더 교체
+      // プレースホルダーのインデックスは0から始まるため、そのまま使用
+      console.log('🔍 이미지 URL 배열:', imageUrls);
+      console.log('🔍 startIndex:', startIndex);
+      console.log('🔍 본문 이미지들:', imageUrls.slice(startIndex));
+
       imageUrls.slice(startIndex).forEach((url, index) => {
         const placeholder = `__IMAGE_PLACEHOLDER_${index}__`;
-        // https가 ttps로 잘못된 경우 수정
-        let correctedUrl = url;
-        if (correctedUrl.startsWith('ttps://')) {
-          correctedUrl = 'h' + correctedUrl;
+        console.log(`📝 플레이스홀더 ${placeholder} → ${url}`);
+
+        // 플레이스홀더가 실제로 존재하는지 확인
+        if (textContent.includes(placeholder)) {
+          console.log(`✅ ${placeholder} 발견, 교체 진행`);
+          // URLが有効かチェック
+          if (url && url.startsWith('http')) {
+            textContent = textContent.replace(new RegExp(placeholder, 'g'), url);
+          } else {
+            console.error(`⚠️ 無効なURL: ${url}`);
+          }
+        } else {
+          console.log(`❌ ${placeholder} 없음`);
         }
-        textContent = textContent.replace(
-          new RegExp(placeholder, 'g'),
-          correctedUrl
-        );
       });
 
       setProcessedText(textContent);
